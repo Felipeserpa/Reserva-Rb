@@ -25,15 +25,15 @@ import styles from './login.module.css';
 
                     <label className='p-1  text-slate-300'>Email:</label>
 
-                    <input type='email' name='email' placeholder='Digite seu email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type='email' className="rounded" name='email' placeholder='Digite seu email' value={email} onChange={(e) => setEmail(e.target.value)} />
 
                     <label className='p-1 text-slate-300'>Senha:</label>
 
-                    <input type='senha' name='password' placeholder='*****' value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input type='senha' className="rounded" name='password' placeholder='*****' value={password} onChange={(e) => setPassword(e.target.value)} />
 
                     <button
                         type="submit"
-                        className="h-9 mt-3  bg-blue-600 rounded border-0 text-lg font-medium text-white p-1 ">
+                        className="h-9 mt-3  bg-blue-600 rounded border-1 text-lg font-medium text-white p-1 ">
                         Acessar
                     </button>
 

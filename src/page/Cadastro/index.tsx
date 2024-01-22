@@ -26,17 +26,17 @@ export default function cadastro() {
 
                     <label className='p-1  text-slate-300'>Nome:</label>
 
-                    <input type="text" placeholder='Digite seu nome' value={nome} onChange={(e) => setNome(e.target.value)} />
+                    <input type="text" className="rounded" placeholder='Digite seu nome' value={nome} onChange={(e) => setNome(e.target.value)} />
 
                     <label className='p-1  text-slate-300'>Email:</label>
 
-                    <input type="email" placeholder='Digite seu email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="email" className="rounded" placeholder='Digite seu email' value={email} onChange={(e) => setEmail(e.target.value)} />
 
                     <label className='p-1  text-slate-300'>Senha:</label>
 
-                    <input type="text" placeholder='Digite sua senha' value={senha} onChange={(e) => setSenha(e.target.value)} />
+                    <input type="text" className="rounded" placeholder='Digite sua senha' value={senha} onChange={(e) => setSenha(e.target.value)} />
 
-                    <button className='h-9 mt-3  bg-blue-600 rounded border-0 text-lg font-medium text-white p-1'>Cadastrar</button>
+                    <button className='h-9 mt-3  bg-blue-600 rounded border-1 text-lg font-medium text-white p-1'>Cadastrar</button>
 
                     <p className='p-1 text-slate-300'>já tem conta?Entrar</p>
 
