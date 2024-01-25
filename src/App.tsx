@@ -1,21 +1,23 @@
+import { createBrowserRouter } from "react-router-dom";
 
-import './App.css'
+import  Home  from "./page/Home"
+import  Cadastro  from './page/Cadastro'
+import   Login  from './page/Login'
 
+const router =createBrowserRouter([
+  {
+    path:'/',
+    element:<Home/>
+  },
+  {
+    path:'/cadastro',
+    element:<Cadastro/>
+  },
+  {
+    path:'/login',
+    element:<Login/>
+  },
+  
 
-import Login from './page/Login'
-
- import Cadastro from './page/Cadastro'
-
-function App() {
- 
-
-  return (
-   
- <Cadastro/>
-
-
-
-  )
-}
-
-export default App
+])
+export {router}
