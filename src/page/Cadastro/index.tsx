@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-
+import { Link } from "react-router-dom"
 
 
 
@@ -38,8 +38,9 @@ export default function cadastro() {
 
                     <button className='h-9 mt-3  bg-blue-600 rounded border-1 text-lg font-medium text-white p-1'>Cadastrar</button>
 
-                    <p className='p-1 text-slate-300'>já tem conta?Entrar</p>
-
+                    <Link to="/Login">
+                        <p className='font-medium px-3 py-2 text-slate-100  hover:text-slate-500'c>já tem conta?Entrar</p>
+                    </Link>
                 </form>
 
             </div>

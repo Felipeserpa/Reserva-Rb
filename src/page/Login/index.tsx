@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import {Link} from "react-router-dom"
 
 
 import styles from './login.module.css';
@@ -36,11 +36,13 @@ import styles from './login.module.css';
                         className="h-9 mt-3  bg-blue-600 rounded border-1 text-lg font-medium text-white p-1 ">
                         Acessar
                     </button>
-
-                  <p className='p-1 text-slate-300'>Não tem conta?Cadastre-se</p>
-                  
+                    <Link to="/cadastro">
+                    <p className='font-medium px-3 py-2 text-slate-100  hover:text-slate-500'>Não tem conta?Cadastre-se</p>
+                    </Link>
+              
                   <p  className ='text-slate-300'>Esqueceu a senha?</p>
 
+                  
                 </form>
 
             </div>
