@@ -1,8 +1,11 @@
 
-
+import Header from "../../components/header";
+import Navbar from './Navbar';
 
 export default function cliente(){
-    return(
-        <div>Pagina cliente</div>
-    )
-}
+
+<Navbar/>
+      
+        } 
+
+  

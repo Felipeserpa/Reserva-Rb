@@ -6,8 +6,6 @@ import   Login  from './page/login'
 import Cliente from "./page/cliente";
 import  Admin from "./page/admin";
 
-
-
 const router =createBrowserRouter([
   {
     path:'/',
