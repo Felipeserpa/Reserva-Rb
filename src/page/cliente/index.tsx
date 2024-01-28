@@ -1,11 +1,15 @@
 
-import Header from "../../components/header";
-import Navbar from './Navbar';
+
+import Navbar from '../../components/navbar'
 
 export default function cliente(){
+ 
+ return (
+    <Navbar/>    
 
-<Navbar/>
+ )
+
       
-        } 
+ } 
 
   

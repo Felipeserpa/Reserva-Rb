@@ -13,9 +13,10 @@ const Navbar = () => {
         <div className="text-white font-bold text-lg">Logo</div>
         <div className={`md:flex ${menuOpen ? 'block' : 'hidden'}`}>
           <ul className="md:flex items-center">
-            <li className="text-white mx-2 cursor-pointer">Home</li>
-            <li className="text-white mx-2 cursor-pointer">About</li>
-            <li className="text-white mx-2 cursor-pointer">Contact</li>
+            <li className="text-white mx-2 cursor-pointer">Agendar</li>
+            <li className="text-white mx-2 cursor-pointer">Produtos</li>
+            <li className="text-white mx-2 cursor-pointer">Sobre</li>
+            <li className="text-white mx-2 cursor-pointer">Minha conta</li>
           </ul>
         </div>
         <button
