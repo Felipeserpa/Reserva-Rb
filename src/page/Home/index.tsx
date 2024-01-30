@@ -3,7 +3,7 @@ export default function Home() {
     return (
 
         <div className='grid justify-items-center mt-28'>
-            <img src="image/logo.jpg" alt="barbearia" style={{ width: 200 }} />
+            <img src="image/logo.jpg" className="rounded-full" alt="barbearia" style={{ width: 200 }} />
             <p className="text-slate-100 h-9 mt-4">Sejam bem-vindos</p>
             <div>
                 <nav className="flex justify-center space-x-4">

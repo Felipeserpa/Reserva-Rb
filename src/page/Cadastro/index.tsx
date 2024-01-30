@@ -21,7 +21,7 @@ export default function cadastro() {
 
         <div>
             <div className='grid justify-items-center mt-24'>
-                <img src="image/logo.jpg" alt="barbearia" style={{ width: 200 }} />
+                <img src="image/logo.jpg" className='rounded-full' alt="barbearia" style={{ width: 200 }} />
                 <form onSubmit={handleSubmit} className='w-full max-w-xl flex flex-col px-2 p-2'>
 
                     <label className='p-1  text-slate-300'>Nome:</label>
@@ -39,7 +39,7 @@ export default function cadastro() {
                     <button className='h-9 mt-3  bg-blue-600 rounded border-1 text-lg font-medium text-white p-1'>Cadastrar</button>
 
                     <Link to="/Login">
-                        <p className='font-medium px-3 py-2 text-slate-100  hover:text-slate-500'c>já tem conta?Entrar</p>
+                        <p className='font-medium px-3 py-2 text-slate-100  hover:text-slate-500'>já tem conta?Entrar</p>
                     </Link>
                 </form>
 
