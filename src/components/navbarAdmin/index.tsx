@@ -18,7 +18,7 @@ const Navbar = () => {
         </div>
         <div className={`md:flex ${menuOpen ? 'block' : 'hidden'}`}>
           <ul className="md:flex items-center">
-            <li className="text-white  hover:bg-slate-200 mx-2  rounded-lg hover:text-slate-900 cursor-pointer"><Link to="/cliente">Agendar</Link></li>
+            <li className="text-white  hover:bg-slate-200 mx-2  rounded-lg hover:text-slate-900 cursor-pointer"><Link to="/admin">Agendamentos</Link></li>
             <li className="text-white mx-2 cursor-pointer  hover:bg-slate-200  rounded-lg hover:text-slate-900">Produtos</li>
             <li className="text-white mx-2 cursor-pointer  hover:bg-slate-200  rounded-lg hover:text-slate-900">Sobre</li>
             <li className="text-white mx-2 cursor-pointer  hover:bg-slate-200  rounded-lg hover:text-slate-900">Minha conta</li>
@@ -33,7 +33,7 @@ const Navbar = () => {
         </button>
       </div>
     </nav>
-  ); 
+  );
 };
 
 export default Navbar;
