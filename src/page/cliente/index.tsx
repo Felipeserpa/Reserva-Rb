@@ -1,5 +1,5 @@
 
-
+import  Button  from '../../components/buttonOn'
 import Navbar from '../../components/navbar'
 
 export default function cliente() {
@@ -19,6 +19,7 @@ export default function cliente() {
           <div className='  flex items-start grid-rows-3 grid-flow-col gap-4 mt-4'>
 
             <img src="image/logo.jpg" alt="barbearia" style={{ width: 200 }} />
+            <Button/>
             <img src="image/logo.jpg" alt="barbearia" style={{ width: 200 }} />
 
           </div>
