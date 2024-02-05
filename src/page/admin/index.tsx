@@ -2,12 +2,22 @@
 import Navbar from "../../components/navbarAdmin"
 
 
-export default function admin() {
+
+import { useStatus } from '../../components/context/StatusContext';
+
+const admin = () => {
+    const { isOnline, toggleStatus } = useStatus();
+
+ 
     return (
 
 
 
-        <div> <Navbar />
+        <div>
+            <Navbar />
+
+
+
             <div className=" text-white grid grid-rows-3 grid-flow-col gap-4">
 
                 <div className="row-span-3 font-bold text-xl mt-2 ml-2">Barbearia RB</div>
@@ -17,6 +27,14 @@ export default function admin() {
                     <div className='  flex items-start grid-rows-3 grid-flow-col gap-4 mt-4'>
 
                         <img src="image/logo.jpg" alt="barbearia" style={{ width: 200 }} />
+                        <h1>Admin Page</h1>
+                        <button onClick={toggleStatus}>Toggle Status</button>
+                        <p>Status: {isOnline ? 'Online' : 'Offline'}</p>
+
+
+
+
+
                         <img src="image/logo.jpg" alt="barbearia" style={{ width: 200 }} />
 
                     </div>
@@ -27,4 +45,5 @@ export default function admin() {
 
         </div>
     )
-} 
+}
+export default admin;

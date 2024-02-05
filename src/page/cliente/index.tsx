@@ -1,8 +1,10 @@
 
-import  Button  from '../../components/buttonOn'
-import Navbar from '../../components/navbar'
 
-export default function cliente() {
+import Navbar from '../../components/navbar'
+import { useStatus } from '../../components/context/StatusContext';
+
+const ClientPage = () => {
+  const { isOnline, } = useStatus();
 
   return (
 
@@ -17,10 +19,11 @@ export default function cliente() {
         <div className="row-span-2 col-span-2 font-bold text-xl mt-2">Serviços Disponivel
 
           <div className='  flex items-start grid-rows-3 grid-flow-col gap-4 mt-4'>
-
             <img src="image/logo.jpg" alt="barbearia" style={{ width: 200 }} />
-            <Button/>
-            <img src="image/logo.jpg" alt="barbearia" style={{ width: 200 }} />
+            <div>
+              <h1>Client Page</h1>
+              <p>Status: {isOnline ? 'Online' : 'Offline'}</p>
+            </div>
 
           </div>
 
@@ -30,8 +33,9 @@ export default function cliente() {
 
     </div>
 
-  )
+  );
 
 
-}
+};
+export default ClientPage;
 

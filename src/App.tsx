@@ -5,8 +5,12 @@ import  Cadastro  from './page/cadastro'
 import   Login  from './page/login'
 import Cliente from "./page/cliente";
 import  Admin from "./page/admin";
+import { StatusProvider } from "./components/context/StatusContext";
 
 const router =createBrowserRouter([
+
+
+  
   {
     path:'/',
     element:<Home/>
@@ -23,11 +27,14 @@ const router =createBrowserRouter([
   {
 
        path:'/cliente',
-       element:<Cliente/>
+       element:(  <StatusProvider>
+       <Cliente />
+     </StatusProvider>
+   )
   },
   {
     path:'/admin',
-    element:<Admin/>
+    element:(<StatusProvider><Admin/></StatusProvider>)
   }
 
 
