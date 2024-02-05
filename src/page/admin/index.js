@@ -1,13 +1,18 @@
 
 import Navbar from "../../components/navbarAdmin"
+import React from 'react';
+
+import { useStatus } from '../../components/context/statusContext';
 
 
 
-import { useStatus } from '../../components/context/StatusContext';
+
+
 
 const admin = () => {
+ 
     const { isOnline, toggleStatus } = useStatus();
-
+  
  
     return (
 
@@ -15,8 +20,6 @@ const admin = () => {
 
         <div>
             <Navbar />
-
-
 
             <div className=" text-white grid grid-rows-3 grid-flow-col gap-4">
 
@@ -28,12 +31,8 @@ const admin = () => {
 
                         <img src="image/logo.jpg" alt="barbearia" style={{ width: 200 }} />
                         <h1>Admin Page</h1>
-                        <button onClick={toggleStatus}>Toggle Status</button>
-                        <p>Status: {isOnline ? 'Online' : 'Offline'}</p>
-
-
-
-
+      <button onClick={toggleStatus}>Toggle Status</button>
+      <p>Status: {isOnline ? 'Online' : 'Offline'}</p>
 
                         <img src="image/logo.jpg" alt="barbearia" style={{ width: 200 }} />
 

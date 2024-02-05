@@ -5,7 +5,9 @@ import  Cadastro  from './page/cadastro'
 import   Login  from './page/login'
 import Cliente from "./page/cliente";
 import  Admin from "./page/admin";
-import { StatusProvider } from "./components/context/StatusContext";
+import { Switch } from "react-router-dom";
+import { AdminStatusProvider } from './components/context/adminStatus';
+import { ClientStatusProvider } from './components/context/ClientStatusProvider';
 
 const router =createBrowserRouter([
 
@@ -27,14 +29,25 @@ const router =createBrowserRouter([
   {
 
        path:'/cliente',
-       element:(  <StatusProvider>
-       <Cliente />
-     </StatusProvider>
-   )
+    
+       element: <Switch>
+        <ClientStatusProvider>
+        
+         <Cliente />
+      </ClientStatusProvider>
+
+       </Switch>
+   
   },
   {
     path:'/admin',
-    element:(<StatusProvider><Admin/></StatusProvider>)
+    element:<Switch>
+        <AdminStatusProvider>
+        
+         <Admin />
+      </AdminStatusProvider>
+      
+       </Switch>
   }
 
 
