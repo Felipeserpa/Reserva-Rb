@@ -2,16 +2,11 @@
 import Navbar from "../../components/navbarAdmin"
 import React from 'react';
 
-import { useStatus } from '../../components/context/statusContext';
-
-
-
-
 
 
 const admin = () => {
  
-    const { isOnline, toggleStatus } = useStatus();
+
   
  
     return (
@@ -31,8 +26,6 @@ const admin = () => {
 
                         <img src="image/logo.jpg" alt="barbearia" style={{ width: 200 }} />
                         <h1>Admin Page</h1>
-      <button onClick={toggleStatus}>Toggle Status</button>
-      <p>Status: {isOnline ? 'Online' : 'Offline'}</p>
 
                         <img src="image/logo.jpg" alt="barbearia" style={{ width: 200 }} />
 

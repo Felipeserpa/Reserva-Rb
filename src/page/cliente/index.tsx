@@ -1,13 +1,9 @@
 
 import React from 'react';
-
-import { useStatus } from '../../components/context/statusContext';
-
 import Navbar from '../../components/navbar'
 
 
 const ClientPage = () => {
-  const { isOnline } = useStatus();
 
   return (
 
@@ -23,8 +19,7 @@ const ClientPage = () => {
 
           <div className='  flex items-start grid-rows-3 grid-flow-col gap-4 mt-4'>
             <img src="image/logo.jpg" alt="barbearia" style={{ width: 200 }} />
-            <h1>Client Page</h1>
-      <p>Status: {isOnline ? 'Online' : 'Offline'}</p>
+   
             <div>
             
             </div>
