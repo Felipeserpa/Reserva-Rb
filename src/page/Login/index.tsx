@@ -12,6 +12,13 @@ import styles from './login.module.css';
 
     function handleSubmit() {
 
+if(email == '' || password == ''){
+    alert('Preencha seu login')
+}  
+   
+
+
+
     }
 
     return (

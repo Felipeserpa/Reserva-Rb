@@ -1,5 +1,5 @@
 
-import React from 'react';
+
 import Navbar from '../../components/navbar'
 
 
@@ -17,12 +17,11 @@ const ClientPage = () => {
 
         <div className="row-span-2 col-span-2 font-bold text-xl mt-2">Serviços Disponivel
 
-          <div className='  flex items-start grid-rows-3 grid-flow-col gap-4 mt-4'>
-            <img src="image/logo.jpg" alt="barbearia" style={{ width: 200 }} />
-   
-            <div>
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-1 mt-6 w-full  '>
+          
+            <img src="image/foto01.jpg" className='rounded-full  mt-3' alt="barbearia" style={{ width: 150 }} />
+            <img src="image/foto02.jpg"  className='rounded-full mt-3' alt="barbearia " style={{ width: 150 }} />
             
-            </div>
 
           </div>
 
