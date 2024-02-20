@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import {Link} from "react-router-dom"
 
-import { useForm } from "react-hook-form"
+import {useForm} from 'react-hook-form';
+
 
 
 
@@ -13,9 +14,14 @@ import styles from './login.module.css';
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-   const { register, handleSubmit } = useForm()
-    const onSubmit = (data) => console.log(data)
+ 
+const {register , handleSubmit, formState:{errors} } = useForm();
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const onSubmit = (data: any) =>{
+
+    console.log(data);
+};
  
 
 
@@ -26,16 +32,19 @@ import styles from './login.module.css';
  
             <img src="image/logo.jpg" className='rounded-full' alt="barbearia" style={{width:200}}/>
 
-                <form onSubmit={handleSubmit (onSubmit)} className="w-full max-w-xl flex flex-col px-2 p-2">
+                <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl flex flex-col px-2 p-2">
 
                     <label className='p-1  text-slate-300'>Email:</label>
 
-                    <input {...register("email", { required: true, maxLength: 20 })} className="rounded" name='email' placeholder='Digite seu email' value={email} onChange={(e) => setEmail(e.target.value)} />
-                   
+                    <input type="email" id="email" {...register('email', { required: true, pattern: /^\S+@\S+$/i })} className="rounded" name='email' placeholder='Digite seu email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                   {errors.email && errors.email.type === 'required' && <span className='text-slate-300'>O email é obrigatório.</span>}
+                   {errors.email && errors.email.type === 'pattern' && <span className='text-slate-300'>O email deve ser válido.</span>}
+
                     <label className='p-1 text-slate-300'>Senha:</label>
 
-                    <input type='number'  {...register("password", { min: 8, max: 10 })}  className="rounded" name='password' placeholder='*****' value={password} onChange={(e) => setPassword(e.target.value)} />
-               
+                    <input type="password" id="senha" {...register('senha', { required: true, minLength: 6 })} className="rounded" name='password' placeholder='*****' value={password} onChange={(e) => setPassword(e.target.value)} />
+                    {errors.senha && errors.senha.type === 'required' && <span className='text-slate-300'>A senha é obrigatória.</span>}
+                    {errors.senha && errors.senha.type === 'minLength' && <span className='text-slate-300'>A senha deve ter pelo menos 6 caracteres.</span>}
 
                     <button
                         type="submit"
