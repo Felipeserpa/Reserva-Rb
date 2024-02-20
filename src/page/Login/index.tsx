@@ -42,9 +42,9 @@ const onSubmit = (data: any) =>{
 
                     <label className='p-1 text-slate-300'>Senha:</label>
 
-                    <input type="password" id="senha" {...register('senha', { required: true, minLength: 6 })} className="rounded" name='password' placeholder='*****' value={password} onChange={(e) => setPassword(e.target.value)} />
-                    {errors.senha && errors.senha.type === 'required' && <span className='text-slate-300'>A senha é obrigatória.</span>}
-                    {errors.senha && errors.senha.type === 'minLength' && <span className='text-slate-300'>A senha deve ter pelo menos 6 caracteres.</span>}
+                    <input type="password" id="password" {...register('password', { required: true, minLength: 5 })} className="rounded" name='password' placeholder='*****' value={password} onChange={(e) => setPassword(e.target.value)} />
+                    {errors.password && errors.password.type === 'required' && <span className='text-slate-300'>A senha é obrigatória.</span>}
+                    {errors.password && errors.password.type === 'minLength' && <span className='text-slate-300'>A senha deve ter pelo menos 6 caracteres.</span>}
 
                     <button
                         type="submit"
