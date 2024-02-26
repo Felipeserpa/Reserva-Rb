@@ -3,7 +3,9 @@ import {Link} from "react-router-dom"
 
 import {useForm} from 'react-hook-form';
 
+ import {z} from 'zod';
 
+import {zodResolver} from '@hookform/resolvers/zod'
 
 
 import styles from './login.module.css';
@@ -15,13 +17,15 @@ import styles from './login.module.css';
     const [password, setPassword] = useState("");
 
  
-const {register , handleSubmit, formState:{errors} } = useForm();
+const schema = z.object({
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const onSubmit = (data: any) =>{
+    email:z.string().email("insira um email válido").nonempty("o campo email é obrigatório"),
+    password:z.string().nonempty("o campo senha é obrigatorio"),
 
-    console.log(data);
-};
+})
+
+ type FormData = z.infer<typeof schema>
+
  
 
 
@@ -36,15 +40,13 @@ const onSubmit = (data: any) =>{
 
                     <label className='p-1  text-slate-300'>Email:</label>
 
-                    <input type="email" id="email" {...register('email', { required: true, pattern: /^\S+@\S+$/i })} className="rounded" name='email' placeholder='Digite seu email' value={email} onChange={(e) => setEmail(e.target.value)} />
-                   {errors.email && errors.email.type === 'required' && <span className='text-slate-300'>O email é obrigatório.</span>}
-                   {errors.email && errors.email.type === 'pattern' && <span className='text-slate-300'>O email deve ser válido.</span>}
+                    <input type="email" id="email"  className="rounded" name='email' placeholder='Digite seu email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                 
 
                     <label className='p-1 text-slate-300'>Senha:</label>
 
-                    <input type="password" id="password" {...register('password', { required: true, minLength: 5 })} className="rounded" name='password' placeholder='*****' value={password} onChange={(e) => setPassword(e.target.value)} />
-                    {errors.password && errors.password.type === 'required' && <span className='text-slate-300'>A senha é obrigatória.</span>}
-                    {errors.password && errors.password.type === 'minLength' && <span className='text-slate-300'>A senha deve ter pelo menos 6 caracteres.</span>}
+                    <input type="password" id="password"  className="rounded" name='password' placeholder='*****' value={password} onChange={(e) => setPassword(e.target.value)} />
+                 
 
                     <button
                         type="submit"
