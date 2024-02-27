@@ -10,24 +10,25 @@ import {zodResolver} from '@hookform/resolvers/zod'
 
 import styles from './login.module.css';
 
+const schema = z.object({
+
+    email:z.string().email("insira um email válido").nonempty("o campo email é obrigatório"),
+    password:z.string().nonempty("o campo senha é obrigatorio"),
+
+});
+
+
 
  export default function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
- 
-const schema = z.object({
+const {register, handleSubmit, formState: {errors},} = useForm({
 
-    email:z.string().email("insira um email válido").nonempty("o campo email é obrigatório"),
-    password:z.string().nonempty("o campo senha é obrigatorio"),
+resolver :zodResolver(schema),
 
-})
-
- type FormData = z.infer<typeof schema>
-
- 
-
+});
 
     return (
 
@@ -36,17 +37,17 @@ const schema = z.object({
  
             <img src="image/logo.jpg" className='rounded-full' alt="barbearia" style={{width:200}}/>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl flex flex-col px-28 p-2">
+                <form onSubmit={handleSubmit((d) => console.log(d))} className="w-full max-w-xl flex flex-col px-28 p-2">
 
                     <label className='p-1  text-slate-300'>Email:</label>
 
-                    <input type="email" id="email"  className="rounded" name='email' placeholder='Digite seu email' value={email} onChange={(e) => setEmail(e.target.value)} />
-                 
+                    <input type="email" {...register('email')} id="email"  className="rounded" name='email'     placeholder='Digite seu email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                    {errors.email?.message && <p>{errors.email?.message}</p>}
 
                     <label className='p-1 text-slate-300'>Senha:</label>
 
-                    <input type="password" id="password"  className="rounded" name='password' placeholder='*****' value={password} onChange={(e) => setPassword(e.target.value)} />
-                 
+                    <input type="password"  {...register('password', { valueAsNumber: true })} id="password"  className="rounded" name='password' placeholder='*****' value={password} onChange={(e) => setPassword(e.target.value)} />
+                    {errors.password?.message && <p>{errors.password?.message}</p>}
 
                     <button
                         type="submit"
