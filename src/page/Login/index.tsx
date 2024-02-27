@@ -13,7 +13,7 @@ import styles from './login.module.css';
 const schema = z.object({
 
     email:z.string().email("insira um email válido").nonempty("o campo email é obrigatório"),
-    password:z.string().nonempty("o campo senha é obrigatorio"),
+    password:z.number().min(6)
 
 });
 
