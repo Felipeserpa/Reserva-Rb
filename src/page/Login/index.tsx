@@ -12,12 +12,10 @@ import styles from './login.module.css';
 
 const schema = z.object({
 
-    email:z.string().email("insira um email válido").nonempty("o campo email é obrigatório"),
-    password:z.number().min(6)
+    email:z.string().email("insira um email válido").min(1,{message:'required'}),
+    password:z.number().min(8),
 
 });
-
-
 
  export default function Login() {
 
@@ -41,7 +39,7 @@ resolver :zodResolver(schema),
 
                     <label className='p-1  text-slate-300'>Email:</label>
 
-                    <input type="email" {...register('email')} id="email"  className="rounded" name='email'     placeholder='Digite seu email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="email" {...register('email')} id="email"  className="rounded" name='email' placeholder='Digite seu email' value={email} onChange={(e) => setEmail(e.target.value)} />
                     {errors.email?.message && <p>{errors.email?.message}</p>}
 
                     <label className='p-1 text-slate-300'>Senha:</label>
