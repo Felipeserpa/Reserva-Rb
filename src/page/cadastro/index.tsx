@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 
-import {useform} from 'react-hook-form';
+import {useForm,} from 'react-hook-form';
 
 import {z} from 'zod';
 
@@ -11,8 +11,9 @@ import {zodResolver} from '@hookform/resolvers/zod'
 
 const schema = z.object({
 
-nome:z.string({required_error: "Name is required",
-invalid_type_error: "Name must be a string",}),
+nome:z.string({ required_error: "Name is required",
+invalid_type_error: "Name must be a string"}),
+
 email:z.string().email('Insira o email valido').min(1,{message:'required'}),
 password:z.number().min(8),
 
@@ -25,39 +26,37 @@ export default function cadastro() {
 
     const [nome, setNome] = useState("")
     const [email, setEmail] = useState("")
-    const [senha, setSenha] = useState("")
+    const [password, setPassword] = useState("")
 
 
 
+const {register,handleSubmit,formState:{errors},} = useForm({resolver:zodResolver(schema),
+})
+ const onSubmit = (data) => console.log(data)
 
 
-
-
-
-
-
-    function handleSubmit() {
-
-    }
 
     return (
 
         <div>
             <div className='grid justify-items-center mt-24'>
                 <img src="image/logo.jpg" className='rounded-full' alt="barbearia" style={{ width: 200 }} />
-                <form onSubmit={handleSubmit} className='w-full max-w-xl flex flex-col px-2 p-2'>
+                <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-xl flex flex-col px-20 p-2'>
 
                     <label className='p-1  text-slate-300'>Nome:</label>
 
-                    <input type="text" className="rounded" placeholder='Digite seu nome' name='nome' value={nome} onChange={(e) => setNome(e.target.value)} />
+                    <input type="text" {...register("nome")}className="rounded" placeholder='Digite seu nome' name='nome' value={nome} onChange={(e) => setNome(e.target.value)} />
+                    <p>{errors.nome?.message}</p>
 
                     <label className='p-1  text-slate-300'>Email:</label>
 
-                    <input type="email" className="rounded" placeholder='Digite seu email' name='email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="email" {... register("email")} className="rounded" placeholder='Digite seu email' name='email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <p>{errors.email?.message}</p>
 
                     <label className='p-1  text-slate-300'>Senha:</label>
 
-                    <input type="password" className="rounded" placeholder='Digite sua senha' name='password' value={senha} onChange={(e) => setSenha(e.target.value)} />
+                    <input type="password" {...register("password")} className="rounded" placeholder='Digite sua senha' name='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <p>{errors.password?.message}</p> 
 
                     <button className='h-9 mt-3  bg-blue-600 rounded border-1 text-lg font-medium text-white p-1'>Cadastrar</button>
 

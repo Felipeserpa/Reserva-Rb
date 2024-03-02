@@ -35,7 +35,7 @@ resolver :zodResolver(schema),
  
             <img src="image/logo.jpg" className='rounded-full' alt="barbearia" style={{width:200}}/>
 
-                <form onSubmit={handleSubmit((d) => console.log(d))} className="w-full max-w-xl flex flex-col px-28 p-2">
+                <form onSubmit={handleSubmit((d) => console.log(d))} className="w-full max-w-xl flex flex-col px-20 p-2">
 
                     <label className='p-1  text-slate-300'>Email:</label>
 
