@@ -19,9 +19,9 @@ password: z.string().min(1, { message: 'A senha é obrigatória' }),
 
 export default function cadastro() {
 
-    const [nome, setNome] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [nome, setNome] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
 
     const {register, handleSubmit, formState: {errors},} = useForm({
@@ -44,17 +44,17 @@ export default function cadastro() {
                     <label className='p-1  text-slate-300'>Nome:</label>
 
                     <input type="text" {...register("nome")}className="rounded" placeholder='Digite seu nome' name='nome' value={nome} onChange={(e) => setNome(e.target.value)} />
-                    <p>{errors.nome?.message}</p>
+                    <p className='text-slate-300'>{errors.nome?.message}</p>
 
                     <label className='p-1  text-slate-300'>Email:</label>
 
                     <input type="email" {... register("email")} className="rounded" placeholder='Digite seu email' name='email' value={email} onChange={(e) => setEmail(e.target.value)} />
-                    <p>{errors.email?.message}</p>
+                    <p className='text-slate-300'>{errors.email?.message}</p>
 
                     <label className='p-1  text-slate-300'>Senha:</label>
 
                     <input type="password" {...register("password")} className="rounded" placeholder='Digite sua senha' name='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-                    <p>{errors.password?.message}</p>
+                    <p className='text-slate-300'>{errors.password?.message}</p>
 
 
                     <button className='h-9 mt-3  bg-blue-600 rounded border-1 text-lg font-medium text-white p-1'>Cadastrar</button>

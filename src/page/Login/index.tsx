@@ -3,17 +3,16 @@ import {Link} from "react-router-dom"
 
 import {useForm} from 'react-hook-form';
 
- import {z} from 'zod';
+import {z} from 'zod';
 
 import {zodResolver} from '@hookform/resolvers/zod'
-
 
 import styles from './login.module.css';
 
 const schema = z.object({
 
     email:z.string().email("insira um email válido").min(1,{message:'required'}),
-    password:z.number().min(8),
+    password: z.string().min(1, { message: 'A senha é obrigatória' }),
 
 });
 
@@ -27,6 +26,9 @@ const {register, handleSubmit, formState: {errors},} = useForm({
 resolver :zodResolver(schema),
 
 });
+const onSubmit = (data) => {
+    console.log(data);
+  };
 
     return (
 
@@ -35,17 +37,17 @@ resolver :zodResolver(schema),
  
             <img src="image/logo.jpg" className='rounded-full' alt="barbearia" style={{width:200}}/>
 
-                <form onSubmit={handleSubmit((d) => console.log(d))} className="w-full max-w-xl flex flex-col px-20 p-2">
+                <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl flex flex-col px-20 p-2">
 
                     <label className='p-1  text-slate-300'>Email:</label>
 
                     <input type="email" {...register('email')} id="email"  className="rounded" name='email' placeholder='Digite seu email' value={email} onChange={(e) => setEmail(e.target.value)} />
-                    {errors.email?.message && <p>{errors.email?.message}</p>}
+                     <p className='text-slate-300'>{errors.email?.message}</p>
 
                     <label className='p-1 text-slate-300'>Senha:</label>
 
-                    <input type="password"  {...register('password', { valueAsNumber: true })} id="password"  className="rounded" name='password' placeholder='*****' value={password} onChange={(e) => setPassword(e.target.value)} />
-                    {errors.password?.message && <p>{errors.password?.message}</p>}
+                    <input type="password"  {...register('password')} id="password"  className="rounded" name='password' placeholder='*****' value={password} onChange={(e) => setPassword(e.target.value)} />
+                   <p className='text-slate-300'>{errors.password?.message}</p>
 
                     <button
                         type="submit"
