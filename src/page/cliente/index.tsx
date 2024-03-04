@@ -15,13 +15,18 @@ const ClientPage = () => {
 
         <div className="row-span-3 font-bold text-xl mt-2 ml-2">Barbearia RB</div>
 
-        <div className="row-span-2 col-span-2 font-bold text-xl mt-2">Serviços Disponivel
+        <div className="row-span-2 col-span-2 font-bold text-xl mt-2">Agendamentos
 
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-1 mt-6 w-full  '>
-          
-            <img src="image/foto01.jpg" className='rounded-full  mt-3' alt="barbearia" style={{ width: 150 }} />
-            <img src="image/foto02.jpg"  className='rounded-full mt-3' alt="barbearia " style={{ width: 150 }} />
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-1 mt-6 '>
+            <div>
+            <p>Barbeiro Rayssa</p>
+            <img src="image/foto01.jpg" className='rounded-full  mt-3' alt="barbearia" style={{ width: 150 }}/>
             
+            </div>
+            <div>
+            <p>Barbeiro Vitor</p>
+            <img src="image/foto02.jpg"  className='rounded-full mt-3' alt="barbearia " style={{ width: 150 }} />
+            </div>
 
           </div>
 
