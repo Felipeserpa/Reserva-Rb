@@ -2,24 +2,19 @@
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 
-import {useForm,} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 
 import {z} from 'zod';
 
-import {zodResolver} from '@hookform/resolvers/zod'
+import {zodResolver} from '@hookform/resolvers/zod';
 
 
 const schema = z.object({
-
-nome:z.string({ required_error: "Name is required",
-invalid_type_error: "Name must be a string"}),
-
+nome: z.string().min(8,{ message: 'A nome é obrigatória' }),
 email:z.string().email('Insira o email valido').min(1,{message:'required'}),
-password:z.number().min(8),
+password: z.string().min(1, { message: 'A senha é obrigatória' }),
 
 }).required()
-
-
 
 
 export default function cadastro() {
@@ -29,12 +24,15 @@ export default function cadastro() {
     const [password, setPassword] = useState("")
 
 
+    const {register, handleSubmit, formState: {errors},} = useForm({
 
-const {register,handleSubmit,formState:{errors},} = useForm({resolver:zodResolver(schema),
-})
- const onSubmit = (data) => console.log(data)
+        resolver :zodResolver(schema),
+        
+    });
 
-
+    const onSubmit = (data) => {
+        console.log(data);
+      };
 
     return (
 
@@ -56,7 +54,8 @@ const {register,handleSubmit,formState:{errors},} = useForm({resolver:zodResolve
                     <label className='p-1  text-slate-300'>Senha:</label>
 
                     <input type="password" {...register("password")} className="rounded" placeholder='Digite sua senha' name='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-                    <p>{errors.password?.message}</p> 
+                    <p>{errors.password?.message}</p>
+
 
                     <button className='h-9 mt-3  bg-blue-600 rounded border-1 text-lg font-medium text-white p-1'>Cadastrar</button>
 
