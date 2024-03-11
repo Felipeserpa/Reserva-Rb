@@ -1,4 +1,5 @@
 
+import Modal from '../../components/modal';
 
 import Navbar from '../../components/navbar'
 
@@ -21,11 +22,13 @@ const ClientPage = () => {
             <div>
             <p>Barbeiro Rayssa</p>
             <img src="image/foto01.jpg" className='rounded-full  mt-3' alt="barbearia" style={{ width: 150 }}/>
-            
+            <Modal></Modal>
             </div>
+            
             <div>
             <p>Barbeiro Vitor</p>
             <img src="image/foto02.jpg"  className='rounded-full mt-3' alt="barbearia " style={{ width: 150 }} />
+            <button>Agendar</button>
             </div>
 
           </div>
