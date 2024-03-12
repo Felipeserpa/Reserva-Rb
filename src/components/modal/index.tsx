@@ -21,6 +21,10 @@ export default function modal(){
 
     let subtitle: HTMLHeadingElement | null;
     const [modalIsOpen, setIsOpen] = useState(false);
+
+    const [nome, setNome] = useState("");
+
+
   
     function openModal() {
       setIsOpen(true);
@@ -35,10 +39,13 @@ export default function modal(){
       setIsOpen(false);
     }
 
+    function handleSubmit(){
+alert('oiii')
+    }
     return(
 
         <div>
-        <button onClick={openModal}>Open Modal</button>
+        <button onClick={openModal}>Agendar</button>
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
@@ -46,15 +53,16 @@ export default function modal(){
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-          <button onClick={closeModal}>close</button>
-          <div>I am a modal</div>
-          <form>
-            <input />
-            <button>tab navigation</button>
-            <button>stays</button>
-            <button>inside</button>
-            <button>the modal</button>
+          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Seja Bem-vindo</h2>
+          
+          <div> Reserva Barbearia</div>
+          <form onSubmit={handleSubmit}>
+            
+           <input type='nome' name='nome' placeholder='Digite seu nome' value={nome} onChange={(e) =>setNome(e.target.value)}/>
+
+
+            <button>Enviar</button>
+            <button onClick={closeModal}>Fechar</button>
           </form>
         </Modal>
       </div>
