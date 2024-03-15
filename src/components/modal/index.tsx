@@ -37,7 +37,7 @@ export default function modal(){
   
     function afterOpenModal() {
       // references are now sync'd and can be accessed.
-      subtitle.style.color = '#f00';
+      subtitle.style.color = '#0004e2';
     }
   
     function closeModal() {
@@ -52,7 +52,7 @@ export default function modal(){
     return(
 
         <div>
-        <button onClick={openModal} className='ml-8  hover:bg-cyan-600 rounded-full w-24'>Agendar</button>
+        <button onClick={openModal} className='ml-8  hover:bg-cyan-600 rounded-full w-24  '>Agendar</button>
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
@@ -62,25 +62,25 @@ export default function modal(){
         >
           <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Seja Bem-vindo</h2>
           
-          <div> Reserva Barbearia</div>
+          <div className='font-mono text-lg'> Reserva Barbearia</div>
           <form onSubmit={handleSubmit} className='flex flex-col w-96'>
             
-            <label>Nome:</label>
+            <label className='font-sans pt-0.5'>Nome:</label>
            <input type='nome' className='border-2 rounded-full border-zinc-950' name='nome' placeholder='Digite seu nome' value={nome} onChange={(e) =>setNome(e.target.value)}/>
 
-           <label>Telefone:</label>
+           <label  className='font-sans pt-0.5'>Telefone:</label>
            <input type='number'  className='w-1/2 border-2 rounded-full border-zinc-950' name='tel' placeholder='(081)' value={tel} onChange={(e) =>setTel(e.target.value)}/>
 
-           <label>Data:</label>
+           <label  className='font-sans pt-0.5'>Data:</label>
            <input type='date'  className='w-1/2 border-2 rounded-full border-zinc-950' name='date'  value={date} onChange={(e) =>setDate(e.target.value)}/>
 
-           <label>Horário:</label>
+           <label  className='font-sans pt-0.5'>Horário:</label>
            <input type='time'  className='w-1/2 border-2 rounded-full border-zinc-950' name='time'  value={time} onChange={(e) =>setTime(e.target.value)}/>
 
-            <div className='flex justify-center '>
-            <button className='w-24 mt-2 bg-sky-900 hover:bg-cyan-600  border-solid border-2 border-sky-500     outline-blue-500  text-white rounded-full' >Enviar</button>
+            <div className='flex justify-center'>
+            <button className='w-24 mt-2 bg-sky-900 hover:bg-cyan-600  border-solid border-2 border-sky-500     outline-blue-500  text-white rounded-full mr-2' >Enviar</button>
 
-            <button className='w-24 mt-2 border-solid border-2 border-sky-500 rounded-full' onClick={closeModal}>Fechar</button>
+            <button className='w-24 mt-2 border-solid border-2 border-sky-500 rounded-full bg-red-800  hover:bg-red-600 text-white' onClick={closeModal}>Fechar</button>
             </div>
            
           </form>
