@@ -1,8 +1,9 @@
 
 import Modal from '../../components/modal';
 
-import Navbar from '../../components/navbar'
+import Navbar from '../../components/navbar';
 
+import Footer from '../../components/footer';
 
 const ClientPage = () => {
 
@@ -21,7 +22,7 @@ const ClientPage = () => {
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-1 mt-6 '>
             <div>
             <p>Barbeiro Rayssa</p>
-            <img src="image/foto01.jpg" className='rounded-full  mt-3' alt="barbearia" style={{ width: 158 }}/>
+            <img src="image/foto01.jpg" className='rounded-full  mt-3' alt="barbearia" style={{ width: 156 }}/>
             <Modal></Modal>
             </div>
             
@@ -36,7 +37,9 @@ const ClientPage = () => {
         </div>
       </div>
 
+<Footer/>
 
+ 
     </div>
 
   );
