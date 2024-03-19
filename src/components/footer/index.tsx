@@ -13,7 +13,7 @@ const footer = () => {
     return ( 
       
  <div className="bg-slate-900">
-<div className="h-28 grid grid-cols-3 gap-4 content-center">
+<div className="h-38 grid grid-cols-3 gap-4 content-center">
 
   <div className="ml-8 text-white">
     <p className='font-sans'>Reserva Barbearia</p>

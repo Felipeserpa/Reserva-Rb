@@ -1,7 +1,7 @@
 
 import Navbar from "../../components/navbarAdmin"
 import React from 'react';
-
+import Footer from '../../components/footer';
 
 
 const admin = () => {
@@ -22,17 +22,17 @@ const admin = () => {
 
                     <div className='  flex items-start grid-rows-3 grid-flow-col gap-4 mt-4'>
 
-                        <img src="image/logo.jpg" alt="barbearia" style={{ width: 200 }} />
+                        <img src="image/logo.jpg" alt="barbearia" style={{ width: 150 }} />
                         <h1>Admin Page</h1>
 
-                        <img src="image/logo.jpg" alt="barbearia" style={{ width: 200 }} />
+                        <img src="image/logo.jpg" alt="barbearia" style={{ width: 150 }} />
 
                     </div>
 
                 </div>
             </div>
 
-
+<Footer/>
         </div>
     )
 }
