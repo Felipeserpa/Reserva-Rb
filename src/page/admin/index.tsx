@@ -30,10 +30,12 @@ const admin = () => {
                     </div>
 
                 </div>
+           
             </div>
 
-<Footer/>
+            <Footer/>
         </div>
+        
     )
 }
 export default admin;

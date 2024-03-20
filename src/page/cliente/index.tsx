@@ -21,15 +21,15 @@ const ClientPage = () => {
 
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-1 mt-6 '>
             <div>
-            <p>Barbeiro Rayssa</p>
-            <img src="image/foto01.jpg" className='rounded-full  mt-3' alt="barbearia" style={{ width: 156 }}/>
-            <Modal></Modal>
+              <p>Barbeiro Rayssa</p>
+              <img src="image/foto01.jpg" className='rounded-full  mt-3' alt="barbearia" style={{ width: 156 }} />
+              <Modal></Modal>
             </div>
-            
+
             <div>
-            <p>Barbeiro Vitor</p>
-            <img src="image/foto02.jpg"  className='rounded-full mt-3' alt="barbearia " style={{ width: 150 }} />
-            <Modal></Modal>
+              <p>Barbeiro Vitor</p>
+              <img src="image/foto02.jpg" className='rounded-full mt-3' alt="barbearia " style={{ width: 150 }} />
+              <Modal></Modal>
             </div>
 
           </div>
@@ -37,9 +37,9 @@ const ClientPage = () => {
         </div>
       </div>
 
-<Footer/>
+      <Footer />
 
- 
+
     </div>
 
   );

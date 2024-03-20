@@ -52,7 +52,7 @@ export default function modal(){
     return(
 
         <div>
-        <button onClick={openModal} className='ml-8  hover:bg-cyan-600 rounded-full w-24  '>Agendar</button>
+        <button onClick={openModal} className='ml-8  hover:bg-cyan-600 rounded-full w-24'>Agendar</button>
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
