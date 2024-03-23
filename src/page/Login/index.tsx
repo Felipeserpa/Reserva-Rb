@@ -1,7 +1,13 @@
 import { useState } from 'react';
 import {Link} from "react-router-dom"
+import {App} from  'App'
 
 import {useForm} from 'react-hook-form';
+
+import { useNavigate } from 'react-router-dom';
+
+import { auth } from '../../services/fireaseConection'
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 import {z} from 'zod';
 
@@ -20,15 +26,25 @@ const schema = z.object({
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+     const navigate = useNavigate();
 
 const {register, handleSubmit, formState: {errors},} = useForm({
 
 resolver :zodResolver(schema),
 
 });
-const onSubmit = (data) => {
-    console.log(data);
-  };
+const onSubmit =  async() => {
+    try{
+        await signInWithEmailAndPassword(auth,email ,password);
+        if (email === 'admin@teste.com') {
+            navigate("/admin");
+          } else {
+            navigate("/cliente");
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
     return (
 
@@ -52,7 +68,7 @@ const onSubmit = (data) => {
                     <button
                         type="submit"
                         className="h-9 mt-3  bg-blue-600 rounded border-1 text-lg font-medium text-white p-1 ">
-                        Acessar
+                       Login
                     </button>
                     <Link to="/cadastro">
                     <p className='font-medium px-3 py-2 text-slate-100  hover:text-slate-500'>Não tem conta?Cadastre-se</p>
