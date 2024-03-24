@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, } from "react-router-dom";
 
 
 import {useForm} from 'react-hook-form';
@@ -9,6 +9,11 @@ import {z} from 'zod';
 
 import {zodResolver} from '@hookform/resolvers/zod';
 
+import {db} from '../../services/fireaseConection'
+
+import {addDoc , collection, onSnapshot, query, orderBy, doc, deleteDoc} from 'firebase/firestore';
+
+import { useNavigate } from 'react-router-dom';
 
 const schema = z.object({
 nome: z.string().min(8,{ message: 'A nome é obrigatória' }),
@@ -20,10 +25,10 @@ password: z.string().min(1, { message: 'A senha é obrigatória' }),
 
 export default function cadastro() {
 
-    const [nome, setNome] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
+    const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const {register, handleSubmit, formState: {errors},} = useForm({
 
@@ -31,9 +36,24 @@ export default function cadastro() {
         
     });
 
-    const onSubmit = (data) => {
-        console.log(data);
-      };
+    const onSubmit = async() => {
+   
+       await addDoc(collection(db,"users"),{
+        nome:nome,
+        email:email,
+        password:password,
+       })
+       .then(() =>{
+        navigate('/cliente')
+
+       })
+       .catch((error)=>{
+        console.log(error)
+       })
+      
+       
+
+    };
 
     return (
 

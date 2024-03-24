@@ -1,19 +1,17 @@
 import { useState } from 'react';
-import {Link} from "react-router-dom"
-import {App} from  'App'
-
+import {Link} from "react-router-dom";
 import {useForm} from 'react-hook-form';
-
 import { useNavigate } from 'react-router-dom';
+import {z} from 'zod';
+import {zodResolver} from '@hookform/resolvers/zod';
+import styles from './login.module.css';
 
-import { auth } from '../../services/fireaseConection'
+
+import {Firestore,addDoc , collection, onSnapshot, query, orderBy, doc, deleteDoc} from 'firebase/firestore';
+
+import { auth } from '../../services/fireaseConection';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
-import {z} from 'zod';
-
-import {zodResolver} from '@hookform/resolvers/zod'
-
-import styles from './login.module.css';
 
 const schema = z.object({
 
@@ -33,18 +31,38 @@ const {register, handleSubmit, formState: {errors},} = useForm({
 resolver :zodResolver(schema),
 
 });
+
 const onSubmit =  async() => {
-    try{
-        await signInWithEmailAndPassword(auth,email ,password);
-        if (email === 'admin@teste.com') {
-            navigate("/admin");
-          } else {
-            navigate("/cliente");
-          }
-        } catch (error) {
-          console.log(error);
+  try {
+    // Tenta fazer login com o Firebase Authentication
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    // Verifica se o usuário é um administrador
+    const isAdmin = user.email === 'admin@example.com';
+
+    // Se for um administrador, redireciona para a página de admin
+    // Caso contrário, verifica se é um cliente no Firestore e redireciona para a página de cliente
+    if (isAdmin) {
+      navigate("/admin");
+
+    } else {
+       const usersRef = Firestore.collection("users");
+        const snapshot = await usersRef.where('email', '==', email).get();
+        if (snapshot.empty) {
+          console.log('Usuário não encontrado.');
+          return;
         }
-      };
+
+        snapshot.forEach(doc => {
+          // Assume que apenas um documento corresponde ao email
+          navigate("/cliente");
+        });
+      }
+    } catch (error) {
+      console.error('Erro ao fazer login:', error.message);
+    }
+  };
 
     return (
 
