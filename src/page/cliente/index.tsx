@@ -8,7 +8,7 @@ import Footer from '../../components/footer';
 const ClientPage = () => {
 
   return (
-
+  
 
     <div>
       <Navbar />

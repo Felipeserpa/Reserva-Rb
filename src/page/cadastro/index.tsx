@@ -9,9 +9,7 @@ import {z} from 'zod';
 
 import {zodResolver} from '@hookform/resolvers/zod';
 
-import {db} from '../../services/fireaseConection'
-
-import {addDoc , collection} from 'firebase/firestore';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 
 
 const schema = z.object({
@@ -37,19 +35,18 @@ export default function cadastro() {
 
     const onSubmit = async() => {
    
-       await addDoc(collection(db,"users"),{
-        nome:nome,
-        email:email,
-        password:password,
-       })
-       .then(() =>{
-        navigate('/cliente')
-
-       })
-       .catch((error)=>{
-        console.log(error)
-       })
-      
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            navigate('/cliente') 
+            const user = userCredential.user;
+            // ...
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // ..
+          });
        
 
     };

@@ -9,7 +9,7 @@ import styles from './login.module.css';
 
 
 import { auth } from '../../services/fireaseConection';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 
 const schema = z.object({
@@ -28,26 +28,20 @@ const schema = z.object({
 const {register, handleSubmit, formState: {errors},} = useForm({
 
 resolver :zodResolver(schema),
-
 });
 
 const onSubmit = async () => {
- 
-  try {
-    // Tenta fazer login com o Firebase Authentication
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
-
-    // Verifica se o usuário é um administrador
-    const isAdmin = user.email === 'admin@teste.com';
-
-    // Se for um administrador, redireciona para a página de admin
-    if (isAdmin) {
-      navigate("/admin");
-    }
-  } catch (error) {
-    console.error('Erro ao fazer login:', error);
-  }
+  const auth = getAuth();
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      navigate('/cliente') 
+      const user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    });
 };
 
 
