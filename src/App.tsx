@@ -5,7 +5,7 @@ import  Cadastro  from './page/cadastro'
 import   Login  from './page/login'
 import Cliente from "./page/cliente";
 import  Admin from "./page/admin";
-
+import AdminLogin from "./page/AdminLogin";
 
 const router =createBrowserRouter([
 
@@ -35,7 +35,11 @@ const router =createBrowserRouter([
     element:<Admin />
     
       
+  },{
+    path:'/AdminLogin',
+    element:<AdminLogin/>
   }
+
 
 
 ])

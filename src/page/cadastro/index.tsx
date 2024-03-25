@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Link, } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 
 import {useForm} from 'react-hook-form';
@@ -11,9 +11,8 @@ import {zodResolver} from '@hookform/resolvers/zod';
 
 import {db} from '../../services/fireaseConection'
 
-import {addDoc , collection, onSnapshot, query, orderBy, doc, deleteDoc} from 'firebase/firestore';
+import {addDoc , collection} from 'firebase/firestore';
 
-import { useNavigate } from 'react-router-dom';
 
 const schema = z.object({
 nome: z.string().min(8,{ message: 'A nome é obrigatória' }),

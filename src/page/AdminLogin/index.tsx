@@ -19,7 +19,7 @@ const schema = z.object({
 
 });
 
- export default function Login() {
+ export default function AdminLogin() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -61,6 +61,8 @@ const onSubmit = async () => {
 
                 <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl flex flex-col px-20 p-2">
 
+                   <label className='text-slate-300 p-1 text-xl'>Área Restrita</label>
+
                     <label className='p-1  text-slate-300'>Email:</label>
 
                     <input type="email" {...register('email')} id="email"  className="rounded" name='email' placeholder='Digite seu email' value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -73,14 +75,11 @@ const onSubmit = async () => {
 
                     <button
                         type="submit"
-                        className="h-9 mt-3  bg-blue-600 rounded border-1 text-lg font-medium text-white p-1 ">
+                        className="h-9 mt-3  bg-red-600 rounded border-1 text-lg font-medium text-white p-1 ">
                        Login
                     </button>
-                    <Link to="/cadastro">
-                    <p className='font-medium px-3 py-2 text-slate-100  hover:text-slate-500'>Não tem conta?Cadastre-se</p>
-                    </Link>
-              
-                  <p  className ='text-slate-300'>Esqueceu a senha?</p>
+            
+                  <p className ='text-slate-300'>Esqueceu a senha?</p>
 
                   
                 </form>
