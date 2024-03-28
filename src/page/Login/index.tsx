@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
 import {Link} from "react-router-dom";
 import {useForm} from 'react-hook-form';
@@ -8,7 +9,7 @@ import styles from './login.module.css';
 
 
 
-import { auth } from '../../services/fireaseConection';
+
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 
@@ -36,10 +37,11 @@ const onSubmit = async () => {
     .then((userCredential) => {
       navigate('/cliente') 
       const user = userCredential.user;
-      // ...
+      
     })
     .catch((error) => {
       const errorCode = error.code;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const errorMessage = error.message;
     });
 };
