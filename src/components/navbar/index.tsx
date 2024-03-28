@@ -10,7 +10,8 @@ import { useState } from 'react';
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false); // Exemplo de uso de useState, mas não de loadingauth
-  const [isLogged, setIsLogged] = useState(false)
+  const [isLogged, setIsLogged] = useState(true)
+  
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
     
@@ -32,19 +33,19 @@ function Navbar() {
             <li className="text-white mx-2 cursor-pointer  hover:bg-slate-200  rounded-lg hover:text-slate-900">Produtos</li>
             <li className="text-white mx-2 cursor-pointer  hover:bg-slate-200  rounded-lg hover:text-slate-900">Sobre</li>
             <li className="text-white mx-2 cursor-pointer  hover:bg-slate-200  rounded-lg hover:text-slate-900">Minha conta</li>
-          </ul>
-          <div>
-            {isLogged ? (
-              <button onClick={handleLogout} className="text-white">
-                Sair
-                <GrLogin className="ml-2" />
-              </button>
-            ) : (
-              <Link to="/login" className="text-white">
-                Entrar
+
+            <Link to="/cliente" className="text-white mr-20">
                 <VscAccount className="ml-2" />
               </Link>
-            )}
+          </ul>
+          <div>
+            {isLogged &&
+              <button onClick={handleLogout} className="text-white">
+                <Link to="/login" className="text-white">Sair
+               <GrLogin className="ml-2" />
+              </Link>
+              </button>
+           }
           </div>
         </div>
         <button
