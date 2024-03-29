@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 
 import {Link} from "react-router-dom"
 import { VscAccount } from "react-icons/vsc";
@@ -6,15 +6,14 @@ import { GrLogin } from "react-icons/gr";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const [isLogged, setIslogged]= useState('true');
+  const [isLogged, setIslogged]= useState(true);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
 const handleLogout = ()=>{
-  setIslogged(false)
+  setIslogged(false);
 }
 
 
@@ -30,22 +29,26 @@ const handleLogout = ()=>{
             <li className="text-white mx-2 cursor-pointer  hover:bg-slate-200  rounded-lg hover:text-slate-900">Produtos</li>
             <li className="text-white mx-2 cursor-pointer  hover:bg-slate-200  rounded-lg hover:text-slate-900">Sobre</li>
             <li className="text-white mx-2 cursor-pointer  hover:bg-slate-200  rounded-lg hover:text-slate-900">Minha conta</li>
-          </ul>
-
+          
+          
+          
           <div className='mr-20  ml-2 text-white'>
-            <VscAccount/>
+            <VscAccount size={25}/>
           </div>
-          <div className='text-white'>
+          <div>
 
           {isLogged &&
-              <button onClick={handleLogout} className="text-white">
+              <button onClick={handleLogout} className="text-white ">
                 <Link to="/adminLogin" className="text-white">Sair
-               <GrLogin className="ml-2" />
+               <GrLogin className="ml-2" size={20} />
               </Link>
               </button>
            }
         
           </div>
+          
+          </ul>
+
         </div>
         <button
           onClick={toggleMenu}
