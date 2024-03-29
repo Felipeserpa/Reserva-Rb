@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 
 import {Link} from "react-router-dom"
-
+import { VscAccount } from "react-icons/vsc";
+import { GrLogin } from "react-icons/gr";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const [isLogged, setIslogged]= useState('true');
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+const handleLogout = ()=>{
+  setIslogged(false)
+}
+
 
   return (
     <nav className="bg-gray-800 p-4 ">
@@ -22,8 +30,22 @@ const Navbar = () => {
             <li className="text-white mx-2 cursor-pointer  hover:bg-slate-200  rounded-lg hover:text-slate-900">Produtos</li>
             <li className="text-white mx-2 cursor-pointer  hover:bg-slate-200  rounded-lg hover:text-slate-900">Sobre</li>
             <li className="text-white mx-2 cursor-pointer  hover:bg-slate-200  rounded-lg hover:text-slate-900">Minha conta</li>
-            <li className="text-white mx-2 cursor-pointer  hover:bg-slate-200  rounded-lg hover:text-slate-900">Sair</li>
           </ul>
+
+          <div className='mr-20  ml-2 text-white'>
+            <VscAccount/>
+          </div>
+          <div className='text-white'>
+
+          {isLogged &&
+              <button onClick={handleLogout} className="text-white">
+                <Link to="/adminLogin" className="text-white">Sair
+               <GrLogin className="ml-2" />
+              </Link>
+              </button>
+           }
+        
+          </div>
         </div>
         <button
           onClick={toggleMenu}
