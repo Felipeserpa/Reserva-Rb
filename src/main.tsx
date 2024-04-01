@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom/client'
 import {router} from './App.tsx'
 import {RouterProvider} from 'react-router-dom'
 import './index.css'
-import AuthProvider from './contexts/AuthContext.tsx'
+
+import { AuthProvider } from "c:/Users/Felipe serpa/OneDrive/Documentos/React Projetos/reserva-barbearia/src/contexts/AuthContext";
+
 
 
 
