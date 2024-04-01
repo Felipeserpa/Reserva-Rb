@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Link,useNavigate } from "react-router-dom";
 
 
@@ -11,7 +11,8 @@ import {zodResolver} from '@hookform/resolvers/zod';
  
 
 
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword, signOut } from "firebase/auth"
+import { auth } from '../../services/fireaseConection';
 
 
 const schema = z.object({
@@ -34,6 +35,15 @@ export default function cadastro() {
         resolver :zodResolver(schema),
         
     });
+
+    useEffect (() =>{
+
+        async function handleLogout() {
+          await signOut(auth)
+        }
+      
+      handleLogout();
+      },[])
 
     const onSubmit = async() => {
    

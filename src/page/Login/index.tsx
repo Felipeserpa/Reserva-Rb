@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {Link} from "react-router-dom";
 import {useForm} from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +10,8 @@ import styles from './login.module.css';
 
 
 
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { auth } from '../../services/fireaseConection';
 
 
 const schema = z.object({
@@ -30,6 +31,19 @@ const {register, handleSubmit, formState: {errors},} = useForm({
 
 resolver :zodResolver(schema),
 });
+
+useEffect (() =>{
+
+  async function handleLogout() {
+    await signOut(auth)
+  }
+
+handleLogout();
+},[])
+
+
+
+
 
 const onSubmit = async () => {
   const auth = getAuth();
