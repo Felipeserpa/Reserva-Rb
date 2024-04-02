@@ -6,14 +6,10 @@ import './index.css'
 
 import { AuthProvider } from "c:/Users/Felipe serpa/OneDrive/Documentos/React Projetos/reserva-barbearia/src/contexts/AuthContext";
 
-
-
-
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
 <AuthProvider>
      <RouterProvider router={router}/>
 </AuthProvider>
-
   </React.StrictMode>,
 )

@@ -7,6 +7,10 @@ import Cliente from "./page/cliente";
 import  Admin from "./page/admin";
 import AdminLogin from "./page/AdminLogin";
 
+ import { Private } from "./routes/private";
+ import { PrivateAdmin } from "./routes/PrivateAdmin";
+
+
 const router =createBrowserRouter([
 
 
@@ -27,15 +31,15 @@ const router =createBrowserRouter([
   {
 
        path:'/cliente',
-       element: <Cliente />
+       element: <Private><Cliente /></Private>
 
   },
   {
     path:'/admin',
-    element:<Admin />
-    
+    element: <PrivateAdmin><Admin/></PrivateAdmin>
       
   },{
+    
     path:'/AdminLogin',
     element:<AdminLogin/>
   }

@@ -39,7 +39,7 @@ const handleLogout = ()=>{
 
           {isLogged &&
               <button onClick={handleLogout} className="text-white ">
-                <Link to="/adminLogin" className="text-white">Sair
+                <Link to="/AdminLogin" className="text-white">Sair
                <GrLogin className="ml-2" size={20} />
               </Link>
               </button>
