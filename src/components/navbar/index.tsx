@@ -1,24 +1,31 @@
 
 
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 
 import { VscAccount } from "react-icons/vsc";
-import { GrLogin } from "react-icons/gr";
-
-
+import { GrLogin } from "react-icons/gr"
 import { useState } from 'react';
+
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
+
+
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false); // Exemplo de uso de useState, mas não de loadingauth
-  const [isLogged, setIsLogged] = useState(true)
+ 
+   const {logout} = useContext(AuthContext);
+   const navigate = useNavigate();
   
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
     
   };
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await logout()
+   navigate('/login')
     // Lógica para fazer logout do cliente
-    setIsLogged(false);
+  
   };
 
   return (
@@ -39,13 +46,9 @@ function Navbar() {
               </Link>
           </ul>
           <div>
-            {isLogged &&
               <button onClick={handleLogout} className="text-white">
-                <Link to="/login" className="text-white">
                <GrLogin className="ml-2" size={20} />
-              </Link>
               </button>
-           }
           </div>
         </div>
         <button

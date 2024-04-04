@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { ReactNode, createContext , useState, useEffect } from "react";
 
-import { onAuthStateChanged, } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from '../services/fireaseConection';
 
 
@@ -13,6 +14,7 @@ interface AuthProviderProps {
 interface AuthContextData {
     signed: boolean;
     loadingAuth: boolean;
+    logout: () => Promise<void>
 }
 
 interface UserProps {
@@ -45,6 +47,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
         return () => unsubscribe();
     }, []);
+
+const logout = async () =>{
+    try{
+        await signOut(auth);
+    }catch(error){
+        console.error("Erro ao fazer logout:", error)
+    }
+};
 
     return (
         <AuthContext.Provider value={{ signed: !!user, loadingAuth }}>

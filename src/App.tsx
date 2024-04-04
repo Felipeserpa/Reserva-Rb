@@ -7,7 +7,7 @@ import Cliente from "./page/cliente";
 import  Admin from "./page/admin";
 import AdminLogin from "./page/AdminLogin";
 
- import { Private } from "./routes/private";
+ import { Private } from "../src/routes/Private";
  import { PrivateAdmin } from "./routes/PrivateAdmin";
 
 
