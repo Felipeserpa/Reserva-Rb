@@ -4,7 +4,7 @@ import {router} from './App.tsx'
 import {RouterProvider} from 'react-router-dom'
 import './index.css'
 
-import { AuthProvider } from "c:/Users/Felipe serpa/OneDrive/Documentos/React Projetos/reserva-barbearia/src/contexts/AuthContext";
+import { AuthProvider } from "../src/contexts/AuthContext.tsx"
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

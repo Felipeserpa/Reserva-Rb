@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import  Home from "./page/home"
 import  Cadastro  from './page/cadastro'
-import   Login  from './page/login'
+import   Login  from './page/Login'
 import Cliente from "./page/cliente";
 import  Admin from "./page/admin";
 import AdminLogin from "./page/AdminLogin";
