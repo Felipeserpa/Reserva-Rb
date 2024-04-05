@@ -1,7 +1,6 @@
 
-import { useState,useEffect } from 'react';
+import { useState, } from 'react';
 import { Link,useNavigate } from "react-router-dom";
-
 
 import {useForm} from 'react-hook-form';
 
@@ -11,8 +10,10 @@ import {zodResolver} from '@hookform/resolvers/zod';
  
 
 
-import { getAuth, createUserWithEmailAndPassword, signOut } from "firebase/auth"
-import { auth } from '../../services/fireaseConection';
+import {createUserWithEmailAndPassword, getAuth, } from "firebase/auth"
+
+import { addDoc, collection, getFirestore,} from 'firebase/firestore';
+
 
 
 const schema = z.object({
@@ -36,31 +37,29 @@ export default function cadastro() {
         
     });
 
-    useEffect (() =>{
-
-        async function handleLogout() {
-          await signOut(auth)
-        }
+    const onSubmit = async () => {
+      const auth = getAuth();
       
-      handleLogout();
-      },[])
-
-    const onSubmit = async() => {
-   
-        const auth = getAuth();
-        createUserWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            navigate('/cliente') 
-            const user = userCredential.user;
-            // ...
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // ..
-          });
-       
-
+      try {
+        // Criar usuário na autenticação do Firebase
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        
+        // Criar usuário no banco de dados
+        const db = getFirestore();
+       await addDoc(collection(db, "users"),{
+         email: email,
+        uid:user.uid,
+     // Adicione outros campos conforme necessário
+   });
+   console.log("Usuário registrado com sucesso!");
+   return user;
+        
+        // Você pode adicionar mais lógica aqui, como redirecionar o usuário para outra página após o login bem-sucedido
+      } catch (error) {
+        console.error('Erro ao criar usuário:',);
+        // Tratar erros conforme necessário
+      }
     };
 
     return (
@@ -100,3 +99,5 @@ export default function cadastro() {
 
     );
 }
+
+

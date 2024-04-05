@@ -2,7 +2,7 @@
 
 import { ReactNode, createContext , useState, useEffect } from "react";
 
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut  } from "firebase/auth";
 import { auth } from '../services/fireaseConection';
 
 
@@ -12,6 +12,7 @@ interface AuthProviderProps {
 }
 
 interface AuthContextData {
+    
     signed: boolean;
     loadingAuth: boolean;
     logout: () => Promise<void>
@@ -49,10 +50,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }, []);
 
 const logout = async () =>{
-    try{
-        await signOut(auth);
-    }catch(error){
-        console.error("Erro ao fazer logout:", error)
+    console.log("Chamando a função logout");
+    console.log("Usuário atual:", auth.currentUser);
+    console.log("Instância de auth:", auth);
+
+    try {
+        if (auth.currentUser) {
+            await signOut(auth); // Corrigindo aqui, usando auth como parâmetro
+            console.log("Logout realizado com sucesso.");
+        } else {
+            console.error("Nenhum usuário logado.");
+        }
+    } catch(error) {
+        console.error("Erro ao fazer logout:", error);
     }
 };
 

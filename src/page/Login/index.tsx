@@ -41,10 +41,6 @@ useEffect (() =>{
 handleLogout();
 },[])
 
-
-
-
-
 const onSubmit = async () => {
   const auth = getAuth();
   signInWithEmailAndPassword(auth, email, password)

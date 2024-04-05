@@ -11,6 +11,8 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 
 
+
+
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false); // Exemplo de uso de useState, mas não de loadingauth
  
