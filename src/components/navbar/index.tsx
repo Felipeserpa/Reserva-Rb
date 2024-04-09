@@ -16,7 +16,7 @@ import { auth } from "../../services/fireaseConection";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false); // Exemplo de uso de useState, mas não de loadingauth
- 
+  const [menuOpens, setMenuOpens] = useState(false)
 
   const { logout, } = useContext(AuthContext);
    const navigate = useNavigate();
@@ -47,37 +47,57 @@ function Navbar() {
   }
   };
 
-  return (
-    <nav className="bg-gray-800 p-4 ">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="text-white font-bold text-lg">
-          <img src="image/logo.jpg" className="rounded-full" alt="barbearia" style={{ width: 50 }} />
-        </div>
-        <div className={`md:flex ${menuOpen ? 'block' : 'hidden'}`}>
-          <ul className="md:flex items-center">
-            <li className="text-white  hover:bg-slate-200 mx-2  rounded-lg hover:text-slate-900 cursor-pointer"><Link to="/cliente">Agendar</Link></li>
-            <li className="text-white mx-2 cursor-pointer  hover:bg-slate-200  rounded-lg hover:text-slate-900">Produtos</li>
-            <li className="text-white mx-2 cursor-pointer  hover:bg-slate-200  rounded-lg hover:text-slate-900">Sobre</li>
-            <li className="text-white mx-2 cursor-pointer  hover:bg-slate-200  rounded-lg hover:text-slate-900">Minha conta</li>
+const toggle = () =>{
+  setMenuOpens(!menuOpens);
 
-            <Link to="/cliente" className="text-white mr-20">
+  }
+
+
+  return (
+   
+      <nav className="bg-white border-gray-200 dark:bg-gray-900 ">
+  <div className= " max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <a href="/cliente" className="flex items-center space-x-3 rtl:space-x-reverse">
+    <img src="image/logo.jpg" className="rounded-full" alt="barbearia" style={{ width: 60 }} />
+        <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Reserva Barbearia</span>
+    </a>
+    <button onClick={toggle} data-collapse-toggle="navbar-default" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+        <span className="sr-only">Open main menu</span>
+        <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+        </svg>
+    </button>
+    <div className= {`md:block ${menuOpens ? 'block' : 'hidden'}`} id="navbar-default">
+      <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+      <li className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page cursor-pointer"><Link to="/cliente">Agendar</Link></li>
+            <li className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Produtos</li>
+            <li className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Sobre</li>
+            <li className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Minha conta</li>
+   
+        <Link to="/cliente" className="text-white mr-20">
                 <VscAccount className="ml-2" size={25} />
               </Link>
-          </ul>
-          <div>
+              <div>
               <button onClick={handleLogout} className="text-white">
                <GrLogin className="ml-2" size={20} />
               </button>
           </div>
-        </div>
-        <button
-          onClick={toggleMenu}
-          className="md:hidden text-white focus:outline-none"
-        >
-          ☰
-        </button>
-      </div>
-    </nav>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+   
   );
 }
 
