@@ -15,16 +15,13 @@ import { auth } from "../../services/fireaseConection";
 
 
 function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false); // Exemplo de uso de useState, mas não de loadingauth
+  // Exemplo de uso de useState, mas não de loadingauth
   const [menuOpens, setMenuOpens] = useState(false)
 
   const { logout, } = useContext(AuthContext);
    const navigate = useNavigate();
   
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-    
-  };
+
   const handleLogout = async () => {
     const currentUser = auth.currentUser
   const auths = getAuth()
