@@ -8,7 +8,8 @@ import { useState } from 'react';
 
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-
+import { getAuth, signOut } from "firebase/auth";
+import { auth } from "../../services/fireaseConection";
 
 
 
@@ -16,7 +17,8 @@ import { AuthContext } from "../../contexts/AuthContext";
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false); // Exemplo de uso de useState, mas não de loadingauth
  
-   const {logout} = useContext(AuthContext);
+
+  const { logout, } = useContext(AuthContext);
    const navigate = useNavigate();
   
   const toggleMenu = () => {
@@ -24,10 +26,25 @@ function Navbar() {
     
   };
   const handleLogout = async () => {
-    await logout()
-   navigate('/login')
+    const currentUser = auth.currentUser
+  const auths = getAuth()
+   localStorage.setItem('currentUser',currentUser?.uid ?? '')
+   logout();
+    try {
+      await signOut(auths);
+      const storedUserId = localStorage.getItem('currentUser') ?? '';
+    if (currentUser && currentUser.uid === storedUserId) {
+      // Continue com o processo de logout
+      navigate('/cliente');
+      console.log("Usuário desconectado com sucesso!");
+  }else{
+    console.log("Logout ignorado - outro usuário já fez login.");
+  } 
+ 
+  } catch (error) {
+      console.error("Erro ao fazer logout:", error);
     // Lógica para fazer logout do cliente
-  
+  }
   };
 
   return (

@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { ReactNode, createContext , useState, useEffect } from "react";
+import { ReactNode, createContext , useState, useEffect, SetStateAction } from "react";
 
-import { onAuthStateChanged, signOut  } from "firebase/auth";
+import { onAuthStateChanged, } from "firebase/auth";
 import { auth } from '../services/fireaseConection';
 
 
@@ -15,7 +15,7 @@ interface AuthContextData {
     
     signed: boolean;
     loadingAuth: boolean;
-    logout: () => Promise<void>
+    logout: () => void;
 }
 
 interface UserProps {
@@ -30,6 +30,15 @@ export const AuthContext = createContext({} as AuthContextData);
 export function AuthProvider({ children }: AuthProviderProps) {
     const [user, setUser] = useState<UserProps | null>(null);
     const [loadingAuth, setLoadingAuth] = useState(true);
+    const [currentUser, setCurrentUser] = useState(null);
+
+    const login = (user: SetStateAction<null>) => {
+      setCurrentUser(user);
+    };
+  
+    const logout = () => {
+      setCurrentUser(null);
+    };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -49,25 +58,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
         return () => unsubscribe();
     }, []);
 
-const logout = async () =>{
-    console.log("Chamando a função logout");
-    console.log("Usuário atual:", auth.currentUser);
-    console.log("Instância de auth:", auth);
-
-    try {
-        if (auth.currentUser) {
-            await signOut(auth); // Corrigindo aqui, usando auth como parâmetro
-            console.log("Logout realizado com sucesso.");
-        } else {
-            console.error("Nenhum usuário logado.");
-        }
-    } catch(error) {
-        console.error("Erro ao fazer logout:", error);
-    }
-};
 
     return (
-        <AuthContext.Provider value={{ signed: !!user, loadingAuth,logout }}>
+        <AuthContext.Provider value={{ signed: !!user, loadingAuth,logout,login,currentUser}}>
             {children}
         </AuthContext.Provider>
     );

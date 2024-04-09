@@ -53,6 +53,7 @@ export default function cadastro() {
      // Adicione outros campos conforme necessário
    });
    console.log("Usuário registrado com sucesso!");
+   navigate('/cliente')
    return user;
         
         // Você pode adicionar mais lógica aqui, como redirecionar o usuário para outra página após o login bem-sucedido

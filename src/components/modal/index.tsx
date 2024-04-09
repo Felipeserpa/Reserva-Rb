@@ -88,8 +88,8 @@ export default function modal() {
 
           <div className='flex justify-center'>
             <button className='w-24 mt-2 bg-sky-900 hover:bg-cyan-600  border-solid border-2 border-sky-500     outline-blue-500  text-white rounded-full mr-2' >Enviar</button>
-
-            <button className='w-24 mt-2 border-solid border-2 border-sky-500 rounded-full bg-red-800  hover:bg-red-600 text-white' onClick={closeModal}>Fechar</button>
+            <button className='w-24 mt-2 bg-lime-900 hover:bg-lime-600  border-solid border-2 border-lime-500     outline-blue-500  text-white rounded-full mr-2' >Edit</button>
+            <button className='w-24 mt-2 border-solid border-2 border-red-500 rounded-full bg-red-800  hover:bg-red-600 text-white' onClick={closeModal}>Fechar</button>
           </div>
 
         </form>

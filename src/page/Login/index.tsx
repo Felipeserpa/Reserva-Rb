@@ -50,7 +50,6 @@ const onSubmit = async () => {
       
     })
     .catch((error) => {
-      const errorCode = error.code;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const errorMessage = error.message;
     });
