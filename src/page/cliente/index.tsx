@@ -8,35 +8,30 @@ import Footer from '../../components/footer';
 const ClientPage = () => {
 
   return (
-  
+
 
     <div>
       <Navbar />
 
-      <div className=" text-white grid grid-rows-3 grid-flow-col gap-4">
+      <div className=" text-white">
 
-        <div className="row-span-3 font-bold text-xl mt-2 ml-2">Barbearia RB</div>
-
-        <div className="row-span-2 col-span-2 font-bold text-xl mt-2">
-
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-1 mt-3  '>
-            <div>
-              <p></p>
-              <img src="image/foto01.jpg" className='rounded-full  mt-3' alt="barbearia" style={{ width: 156 }} />
-              <Modal></Modal>
-            </div>
-            <div className=''>
-              <p></p>
-              <img src="image/foto02.jpg" className='rounded-full mt-3 ' alt="barbearia " style={{ width: 150 }} />
-              <Modal></Modal>
-            </div>
-
+        <div className="flex flex-row mr-24 ">
+          <div className="basis-1/4 ml-20 mx-8 mt-1">
+            <img src="image/foto01.jpg" className='rounded-full  mt-3' alt="barbearia" style={{ width: 156 }} />
+            <Modal></Modal>
           </div>
-
+          <div className="basis-1/4">
+            <img src="image/foto02.jpg" className='rounded-full mt-3 ' alt="barbearia " style={{ width: 150 }} />
+            <Modal></Modal>
+          </div>
         </div>
+        <div className='mt-28'>
+              <Footer/>
+        </div>
+    
       </div>
 
-      <Footer />
+     
 
 
     </div>
