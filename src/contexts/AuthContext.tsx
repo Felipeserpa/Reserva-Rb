@@ -12,10 +12,11 @@ interface AuthProviderProps {
 }
 
 interface AuthContextData {
-    
+
     signed: boolean;
     loadingAuth: boolean;
     logout: () => void;
+    
 }
 
 interface UserProps {
