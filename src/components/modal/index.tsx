@@ -23,7 +23,7 @@ export default function modal() {
 
   const [nome, setNome] = useState('');
 
-  const [tel, setTel] = useState('081');
+  const [tel, setTel] = useState('(81)');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
 
@@ -48,7 +48,7 @@ export default function modal() {
   return (
 
     <div>
-      <button onClick={openModal} className='ml-8  hover:bg-cyan-600 rounded-full w-24 mt-1'>Agendar</button>
+      <button onClick={openModal} className='ml-5  hover:bg-cyan-600 rounded-full w-24 mt-2'>Agendar</button>
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
@@ -62,16 +62,16 @@ export default function modal() {
         <form onSubmit={handleSubmit} className='flex flex-col w-96'>
 
           <label className='font-sans pt-0.5'>Nome:</label>
-          <input type='nome' className='border-2 rounded-full border-zinc-950' name='nome' placeholder='Digite seu nome' value={nome} onChange={(e) => setNome(e.target.value)} />
+          <input type='nome' className='border-2 rounded-full border-zinc-950 pl-2' name='nome' placeholder='Digite seu nome' value={nome} onChange={(e) => setNome(e.target.value)} />
 
           <label className='font-sans pt-0.5'>Telefone:</label>
-          <input type='number' className='w-1/2 border-2 rounded-full border-zinc-950' name='tel' placeholder='(081)' value={tel} onChange={(e) => setTel(e.target.value)} />
+          <input type='number' className='w-1/2 border-2 rounded-full border-zinc-950 pl-2' name='tel' placeholder='(081)' value={tel} onChange={(e) => setTel(e.target.value)} />
 
           <label className='font-sans pt-0.5'>Data:</label>
-          <input type='date' className='w-1/2 border-2 rounded-full border-zinc-950' name='date' value={date} onChange={(e) => setDate(e.target.value)} />
+          <input type='date' className='w-1/2 border-2 rounded-full border-zinc-950 pl-2' name='date' value={date} onChange={(e) => setDate(e.target.value)} />
 
           <label className='font-sans pt-0.5'>Horário:</label>
-          <input type='time' className='w-1/2 border-2 rounded-full border-zinc-950' name='time' value={time} onChange={(e) => setTime(e.target.value)} />
+          <input type='time' className='w-1/2 border-2 rounded-full border-zinc-950 pl-2' name='time' value={time} onChange={(e) => setTime(e.target.value)} />
           <label>Profissional:</label>
 
           <select className='w-1/2 border-2 rounded-full border-zinc-950'>
