@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Modal from 'react-modal';
 
 
-
 const customStyles = {
   content: {
     top: '50%',
@@ -27,9 +26,6 @@ export default function modal() {
   const [tel, setTel] = useState('081');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
-
-
-
 
   function openModal() {
     setIsOpen(true);
@@ -83,8 +79,6 @@ export default function modal() {
             <option>Raisy</option>
             <option>Vitor</option>
           </select>
-
-
 
           <div className='flex justify-center'>
             <button className='w-24 mt-2 bg-sky-900 hover:bg-cyan-600  border-solid border-2 border-sky-500     outline-blue-500  text-white rounded-full mr-2' >Enviar</button>
