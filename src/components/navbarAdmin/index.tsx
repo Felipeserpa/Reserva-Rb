@@ -60,6 +60,7 @@ const Navbar = () => {
             />
           </svg>
         </button>
+
         <div
           className={`md:block ${menuOpens ? "block" : "hidden"}`}
           id="navbar-default"
