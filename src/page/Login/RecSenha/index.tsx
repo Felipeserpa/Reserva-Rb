@@ -3,18 +3,21 @@ import React from "react";
 import { useState } from "react";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import logoBarb from "./../../../../public/images/logo.jpg";
+import { useNavigate } from "react-router-dom";
 
 export default function recSenha() {
   const [email, setEmail] = useState("");
 
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const auth = getAuth();
     sendPasswordResetEmail(auth, email)
-      .then(() => {})
+      .then(() => {
+        navigate("/login");
+      })
       .catch((error) => {
         console.log(" errorCode = error.code");
         const errorMessage = error.message;
