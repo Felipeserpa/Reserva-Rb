@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useState } from "react";
-
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import logoBarb from "./../../../../public/images/logo.jpg";
 
 export default function recSenha() {
@@ -11,6 +11,14 @@ export default function recSenha() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const auth = getAuth();
+    sendPasswordResetEmail(auth, email)
+      .then(() => {})
+      .catch((error) => {
+        console.log(" errorCode = error.code");
+        const errorMessage = error.message;
+      });
   };
 
   return (
