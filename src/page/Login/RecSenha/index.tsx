@@ -3,10 +3,15 @@ import React from "react";
 import { useState } from "react";
 
 import logoBarb from "./../../../../public/images/logo.jpg";
+
 export default function recSenha() {
   const [email, setEmail] = useState("");
 
   //const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
 
   return (
     <div>
@@ -19,7 +24,10 @@ export default function recSenha() {
             style={{ width: 200 }}
           />
 
-          <form className="w-full max-w-xl flex flex-col px-20 p-2 ">
+          <form
+            className="w-full max-w-xl flex flex-col px-20 p-2 "
+            onSubmit={handleSubmit}
+          >
             <label className="p-1  text-slate-300">Email:</label>
 
             <input
