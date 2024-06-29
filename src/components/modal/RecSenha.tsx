@@ -22,10 +22,30 @@ const RecSenha = ({ open, onClose }) => {
     >
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Texto em um modal
+          Recuperação de Senha
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          <p className="p-2">
+            Você solicitou a recuperação de senha para a sua conta. Por favor,
+            siga as instruções abaixo:
+          </p>
+          <p className="p-2">
+            1. Verifique sua caixa de entrada: Procure por um email com o
+            assunto “Recuperação de Senha” vindo de nossa plataforma. Ele deve
+            conter um link ou código para redefinir sua senha.
+          </p>
+          <p className="p-2">
+            2. Verifique sua pasta de spam: Às vezes, os emails automáticos
+            podem ser filtrados para a pasta de spam. Certifique-se de verificar
+            lá também.
+          </p>
+          <p className="p-2">
+            3. Clique no link ou siga as instruções: Ao encontrar o email,
+            clique no link fornecido ou siga as instruções para criar uma nova
+            senha.
+          </p>
+          Se você não recebeu o email ou precisa de mais assistência, entre em
+          contato com nosso suporte.
         </Typography>
       </Box>
     </Modal>
