@@ -8,12 +8,12 @@ import RecSenhas from "./../../../components/modal/RecSenha";
 
 export default function recSenha() {
   const [email, setEmail] = useState("");
-
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    <RecSenhas />;
+
     const auth = getAuth();
     sendPasswordResetEmail(auth, email)
       .then(() => {
@@ -23,6 +23,14 @@ export default function recSenha() {
         console.log(" errorCode = error.code");
         const errorMessage = error.message;
       });
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -54,12 +62,13 @@ export default function recSenha() {
             <p className="text-slate-300">{Error.email?.message}</p>
 
             <button
+              onClick={handleOpen}
               type="submit"
               className="h-9 mt-3  bg-red-600 rounded border-1 text-lg font-medium text-white p-1 "
             >
               Redefinir
-              <RecSenhas />
             </button>
+            <RecSenhas open={open} onClose={handleClose} />
           </form>
         </div>
       </div>
