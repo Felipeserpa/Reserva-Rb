@@ -4,6 +4,7 @@ import { useState } from "react";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import logoBarb from "./../../../../public/images/logo.jpg";
 import { useNavigate } from "react-router-dom";
+import RecSenhas from "./../../../components/modal/RecSenha";
 
 export default function recSenha() {
   const [email, setEmail] = useState("");
@@ -12,7 +13,7 @@ export default function recSenha() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    <RecSenhas />;
     const auth = getAuth();
     sendPasswordResetEmail(auth, email)
       .then(() => {
@@ -57,6 +58,7 @@ export default function recSenha() {
               className="h-9 mt-3  bg-red-600 rounded border-1 text-lg font-medium text-white p-1 "
             >
               Redefinir
+              <RecSenhas />
             </button>
           </form>
         </div>
