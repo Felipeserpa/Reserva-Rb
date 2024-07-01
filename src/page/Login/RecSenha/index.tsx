@@ -17,8 +17,9 @@ export default function recSenha() {
     const auth = getAuth();
     sendPasswordResetEmail(auth, email)
       .then(() => {
-        
-        navigate("/login");
+        setTimeout(function () {
+          navigate("/login");
+        }, 15000);
       })
       .catch((error) => {
         console.log(" errorCode = error.code");

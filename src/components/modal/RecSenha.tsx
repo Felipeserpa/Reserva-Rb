@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal, Box, Typography, Button } from "@mui/material";
+import { Modal, Box, Typography } from "@mui/material";
 
 const RecSenha = ({ open, onClose }) => {
   const style = {
@@ -25,27 +25,12 @@ const RecSenha = ({ open, onClose }) => {
           Recuperação de Senha
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          <p className="p-2">
-            Você solicitou a recuperação de senha para a sua conta. Por favor,
-            siga as instruções abaixo:
-          </p>
-          <p className="p-2">
-            1. Verifique sua caixa de entrada: Procure por um email com o
-            assunto “Recuperação de Senha” vindo de nossa plataforma. Ele deve
-            conter um link ou código para redefinir sua senha.
-          </p>
-          <p className="p-2">
-            2. Verifique sua pasta de spam: Às vezes, os emails automáticos
-            podem ser filtrados para a pasta de spam. Certifique-se de verificar
-            lá também.
-          </p>
-          <p className="p-2">
-            3. Clique no link ou siga as instruções: Ao encontrar o email,
-            clique no link fornecido ou siga as instruções para criar uma nova
-            senha.
-          </p>
-          Se você não recebeu o email ou precisa de mais assistência, entre em
-          contato com nosso suporte.
+          Verifique sua caixa de entrada para um email com o assunto
+          “Recuperação de Senha”. Ele deve conter um link ou código para
+          redefinir sua senha. Verifique sua pasta de spam, pois às vezes os
+          emails automáticos vão para lá. Clique no link ou siga as instruções
+          no email para criar uma nova senha. Se precisar de mais ajuda, entre
+          em contato com nosso suporte.
         </Typography>
       </Box>
     </Modal>
