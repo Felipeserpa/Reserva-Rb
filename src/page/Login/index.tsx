@@ -101,14 +101,16 @@ export default function Login() {
             Login
           </button>
           <Link to="/cadastro">
-            <p className="font-medium px-3 py-2 text-slate-100  hover:text-slate-500">
+            <p className="font-medium py-2 text-slate-100  hover:text-slate-500">
               Não tem conta?Cadastre-se
             </p>
           </Link>
 
           <Link to="/login/RecSenha">
             {" "}
-            <p className="text-slate-300">Esqueceu a senha?</p>
+            <p className="text-slate-100  hover:text-slate-500">
+              Esqueceu a senha?
+            </p>
           </Link>
         </form>
       </div>
