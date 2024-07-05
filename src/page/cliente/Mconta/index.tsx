@@ -9,35 +9,46 @@ export default function Mconta() {
   return (
     <div>
       <Navbar />
-      <nav className="flex-1 flex flex-col">
-        <a
-          className="nav-link flex p-3 hover:bg-gray-700 text-white"
-          onClick={() => handleClick("page-1")}
-        >
-          <span className="text-sm">Home</span>
-        </a>
-        <a
-          href="#"
-          className="nav-link flex p-3 hover:bg-gray-700"
-          onClick={() => handleClick("page-2")}
-        >
-          <span className="text-sm">Dashboard</span>
-        </a>
-        <a href="#" className="nav-link flex p-3 hover:bg-gray-700">
-          <span className="text-sm">Settings</span>
-        </a>
-      </nav>
 
-      {/* Content Area */}
-      <div className="content flex-grow p-4 text-center">
-        <div id="pagina-1" className={currentPage === "page-1" ? "" : "hidden"}>
-          <h1>Conteúdo da Página 1</h1>
-          {/* Add your page 1 content here */}
+      <div className="flex h-screen">
+        <div className="w-1/6 ">
+          {/* Conteúdo da coluna aqui */}
+          <nav className=" flex-1 flex flex-col text-white">
+            <a
+              className="nav-link flex p-3 hover:bg-gray-700 text-white"
+              onClick={() => handleClick("page-1")}
+            >
+              <span className="text-sm">Home</span>
+            </a>
+            <a
+              href="#"
+              className="nav-link flex p-3 hover:bg-gray-700"
+              onClick={() => handleClick("page-2")}
+            >
+              <span className="text-sm">Dashboard</span>
+            </a>
+            <a href="#" className="nav-link flex p-3 hover:bg-gray-700">
+              <span className="text-sm">Settings</span>
+            </a>
+          </nav>
         </div>
 
-        <div id="pagina-2" className={currentPage === "page-2" ? "" : "hidden"}>
-          <h1>Conteúdo da Página 2</h1>
-          {/* Add your page 2 content here */}
+        <div className="content flex-grow p-4 text-center bg-white">
+          <div
+            id="pagina-1"
+            className={currentPage === "page-1" ? "" : "hidden"}
+          >
+            <h1>Conteúdo da Página 1</h1>
+            {/* Add your page 1 content here */}
+          </div>
+
+          <div
+            id="pagina-2"
+            className={currentPage === "page-2" ? "" : "hidden"}
+          >
+            <h1>Conteúdo da Página 2</h1>
+            {/* Add your page 2 content here */}
+          </div>
         </div>
       </div>
     </div>
