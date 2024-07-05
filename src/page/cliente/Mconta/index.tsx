@@ -56,12 +56,12 @@ export default function Mconta() {
                   alt="barbearia"
                   style={{ width: 200 }}
                 />
-                <form className="w-full max-w-xl flex flex-col  p-2">
+                <form className="w-full max-w-xl flex flex-col  p-2 ">
                   <label className="p-1">Nome:</label>
 
                   <input
                     type="text"
-                    className="rounded pl-1"
+                    className="rounded pl-1 border-slate-950 border-solid border-2"
                     placeholder="Digite seu nome"
                     name="nome"
                     value={nome}
@@ -72,7 +72,7 @@ export default function Mconta() {
 
                   <input
                     type="email"
-                    className="rounded pl-1"
+                    className="rounded pl-1 border-slate-950 border-2"
                     placeholder="Digite seu email"
                     name="email"
                     value={email}
@@ -83,13 +83,12 @@ export default function Mconta() {
 
                   <input
                     type="password"
-                    className="rounded pl-1"
+                    className="rounded pl-1 border-slate-950 border-2 "
                     placeholder="Digite sua senha"
                     name="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  <p className="text-slate-300"></p>
 
                   <button className="h-9 mt-3  bg-blue-600 rounded border-1 text-lg font-medium text-white p-1">
                     Salvar Alterações
