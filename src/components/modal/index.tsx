@@ -1,5 +1,8 @@
+import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import Modal from "react-modal";
+import { db } from "../../services/fireaseConection";
+import { getAuth } from "firebase/auth";
 
 const customStyles = {
   content: {
@@ -18,7 +21,6 @@ export default function modal() {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const [nome, setNome] = useState("");
-
   const [tel, setTel] = useState("(81)");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
@@ -36,8 +38,29 @@ export default function modal() {
     setIsOpen(false);
   }
 
-  function handleSubmit() {
-    console.log(nome, tel, date, time);
+  async function handleSubmit() {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    try {
+      // Obtenha o usuário autenticado
+      if (!user) {
+        console.error("Usuário não autenticado.");
+        return;
+      }
+
+      // Adicione o agendamento com o UID do usuário
+      await addDoc(collection(db, "agUser"), {
+        nome: nome,
+        tel: tel,
+        date: date,
+        time: time,
+        userId: user.uid, // Adicione o UID do usuário
+      });
+
+      console.log("Agendamento cadastrado com sucesso!");
+    } catch (error) {
+      console.error("Erro ao cadastrar agendamento:", error);
+    }
   }
   return (
     <div>
