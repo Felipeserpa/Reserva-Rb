@@ -1,8 +1,8 @@
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { useState } from "react";
 import Modal from "react-modal";
 import { db } from "../../services/fireaseConection";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const customStyles = {
   content: {
@@ -24,6 +24,8 @@ export default function modal() {
   const [tel, setTel] = useState("(81)");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+  const auth = getAuth();
+  const db = getFirestore();
 
   function openModal() {
     setIsOpen(true);
@@ -38,30 +40,33 @@ export default function modal() {
     setIsOpen(false);
   }
 
-  async function handleSubmit() {
-    const auth = getAuth();
-    const user = auth.currentUser;
+  const handleFormSubmit = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     try {
-      // Obtenha o usuário autenticado
-      if (!user) {
-        console.error("Usuário não autenticado.");
-        return;
-      }
-
       // Adicione o agendamento com o UID do usuário
       await addDoc(collection(db, "agUser"), {
-        nome: nome,
-        tel: tel,
-        date: date,
-        time: time,
-        userId: user.uid, // Adicione o UID do usuário
+        nome,
+        tel,
+        date,
+        time,
       });
 
       console.log("Agendamento cadastrado com sucesso!");
     } catch (error) {
       console.error("Erro ao cadastrar agendamento:", error);
     }
-  }
+  };
+
+  // Observador para identificar o usuário conectado
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // Exemplo de uso:
+    } else {
+      // O usuário não está autenticado
+      console.log("Usuário não autenticado.");
+    }
+  });
+
   return (
     <div>
       <button
@@ -80,7 +85,7 @@ export default function modal() {
         <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Seja Bem-vindo</h2>
 
         <div className="font-mono text-lg"> Reserva Barbearia</div>
-        <form onSubmit={handleSubmit} className="flex flex-col w-96">
+        <form onSubmit={handleFormSubmit} className="flex flex-col w-96">
           <label className="font-sans pt-0.5">Nome:</label>
           <input
             type="nome"
@@ -127,7 +132,10 @@ export default function modal() {
           </select>
 
           <div className="flex justify-center">
-            <button className="w-24 mt-2 bg-sky-900 hover:bg-cyan-600  border-solid border-2 border-sky-500     outline-blue-500  text-white rounded-full mr-2">
+            <button
+              type="submit"
+              className="w-24 mt-2 bg-sky-900 hover:bg-cyan-600  border-solid border-2 border-sky-500     outline-blue-500  text-white rounded-full mr-2"
+            >
               Enviar
             </button>
 
