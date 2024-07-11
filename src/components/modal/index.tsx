@@ -43,12 +43,18 @@ export default function modal() {
   const handleFormSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
+      const user = auth.currentUser;
+      if (!user) {
+        return;
+      }
+
       // Adicione o agendamento com o UID do usuário
       await addDoc(collection(db, "agUser"), {
         nome,
         tel,
         date,
         time,
+        userId: user.uid,
       });
 
       console.log("Agendamento cadastrado com sucesso!");
