@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { VscAccount } from "react-icons/vsc";
 import { GrLogin } from "react-icons/gr";
-
+import logoBarb from "./../../../public/images/logo.jpg";
 const Navbar = () => {
   const [menuOpens, setMenuOpens] = useState(false);
 
@@ -26,7 +26,7 @@ const Navbar = () => {
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <img
-            src="image/logo.jpg"
+            src={logoBarb}
             className="rounded-full"
             alt="barbearia"
             style={{ width: 60 }}
