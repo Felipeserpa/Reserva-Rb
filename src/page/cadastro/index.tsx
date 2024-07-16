@@ -48,6 +48,7 @@ export default function cadastro() {
       // Criar usuário no banco de dados
       const db = getFirestore();
       await addDoc(collection(db, "users"), {
+        nome: nome,
         email: email,
         uid: user.uid,
         // Adicione outros campos conforme necessário
