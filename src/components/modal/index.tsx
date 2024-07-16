@@ -77,7 +77,7 @@ export default function modal() {
     <div>
       <button
         onClick={openModal}
-        className="ml-5  hover:bg-cyan-600 rounded-full w-24 mt-2"
+        className="ml-5  hover:bg-cyan-600 rounded-full w-24 mt-2 animate-bounce"
       >
         Agendar
       </button>
