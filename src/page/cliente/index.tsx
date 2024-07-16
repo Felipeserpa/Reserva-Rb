@@ -12,6 +12,9 @@ const ClientPage = () => {
 
       <div className=" text-white">
         <div className="flex flex-row mr-60 ">
+          <div className="relative h-32 w-64 ...">
+            <div className="absolute inset-y-0 left-0 w-16"></div>
+          </div>
           <div className="basis-1/4 ml-20 mx-8 mt-1">
             <img
               src={foto01}
