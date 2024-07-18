@@ -2,17 +2,22 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { VscAccount } from "react-icons/vsc";
 import { GrLogin } from "react-icons/gr";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../services/fireaseConection";
 import logoBarb from "./../../../public/images/logo.jpg";
 
 function Navbar() {
   // Exemplo de uso de useState, mas não de loadingauth
   const [menuOpens, setMenuOpens] = useState(false);
+
+  const [posts, setPosts] = useState([]);
+
+  const [user, setUser] = useState(false);
+  const [userDetail, setUserDetail] = useState({});
 
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -37,6 +42,26 @@ function Navbar() {
       // Lógica para fazer logout do cliente
     }
   };
+
+  useEffect(() => {
+    async function checkLogin() {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // se tem usuario logado ele entra aqui...
+          console.log(user);
+          setUser(true);
+          setUserDetail({
+            email: user.email,
+          });
+        } else {
+          // nao possui nenhum user logado.
+          setUser(false);
+          setUserDetail({});
+        }
+      });
+    }
+    checkLogin();
+  }, []);
 
   const toggle = () => {
     setMenuOpens(!menuOpens);
@@ -106,6 +131,7 @@ function Navbar() {
 
             <Link to="/cliente" className="text-white mr-20">
               <VscAccount className="ml-2" size={25} />
+              <span>Email: {userDetail.email}</span>{" "}
             </Link>
             <div>
               <button onClick={handleLogout} className="text-white">
