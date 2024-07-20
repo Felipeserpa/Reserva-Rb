@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { json, Link, useNavigate } from "react-router-dom";
 import logoBarb from "./../../../public/images/logo.jpg";
 import { useForm } from "react-hook-form";
 
@@ -51,8 +51,17 @@ export default function cadastro() {
         nome: nome,
         email: email,
         uid: user.uid,
+
         // Adicione outros campos conforme necessário
       });
+      // Armazenar informações do usuário no localStorage
+      const userData = {
+        uid: user.uid,
+        email: user.email,
+        nome: nome,
+      };
+      localStorage.setItem("@detailUser", JSON.stringify(userData));
+
       console.log("Usuário registrado com sucesso!");
       navigate("/cliente");
       return user;

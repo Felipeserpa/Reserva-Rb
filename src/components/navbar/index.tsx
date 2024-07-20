@@ -14,8 +14,6 @@ function Navbar() {
   // Exemplo de uso de useState, mas não de loadingauth
   const [menuOpens, setMenuOpens] = useState(false);
 
-  const [posts, setPosts] = useState([]);
-
   const [user, setUser] = useState(false);
   const [userDetail, setUserDetail] = useState({});
 
