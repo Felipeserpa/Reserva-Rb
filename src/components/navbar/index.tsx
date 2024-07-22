@@ -46,7 +46,7 @@ function Navbar() {
 
       if (userDetail) {
         const userDetailObject = JSON.parse(userDetail);
-        setUser(userDetailObject)
+        setUser(userDetailObject);
       }
     }
 
@@ -121,7 +121,7 @@ function Navbar() {
 
             <Link to="/cliente" className="text-white mr-20">
               <VscAccount className="ml-2" size={25} />
-              <h1>Seja bem-vindo {user.nome}!</h1>
+              <h1>Seja bem-vindo {user.nome}</h1>
             </Link>
             <div>
               <button onClick={handleLogout} className="text-white">

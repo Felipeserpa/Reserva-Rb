@@ -141,8 +141,8 @@ export default function modal() {
             onChange={(e) => setOpcaoSelecinada(e.target.value)}
           >
             <option>----</option>
-            <option value="{Raisy}">Raisy</option>
-            <option value="{Vitor}">Vitor</option>
+            <option value="Raisy">Raisy</option>
+            <option value="Vitor">Vitor</option>
           </select>
 
           <div className="flex justify-center">
