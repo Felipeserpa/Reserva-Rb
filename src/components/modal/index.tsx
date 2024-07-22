@@ -24,6 +24,8 @@ export default function modal() {
   const [tel, setTel] = useState("(81)");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+  const [opcaoSelecionada, setOpcaoSelecinada] = useState("");
+
   const auth = getAuth();
   const db = getFirestore();
 
@@ -42,6 +44,7 @@ export default function modal() {
 
   const handleFormSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
+
     try {
       const user = auth.currentUser;
       if (!user) {
@@ -55,6 +58,7 @@ export default function modal() {
         date,
         time,
         userId: user.uid,
+        opcaoSelecionada,
       });
 
       console.log("Agendamento cadastrado com sucesso!");
@@ -131,10 +135,14 @@ export default function modal() {
           />
           <label>Profissional:</label>
 
-          <select className="w-1/2 border-2 rounded-full border-zinc-950">
+          <select
+            className="w-1/2 border-2 rounded-full border-zinc-950"
+            value={opcaoSelecionada}
+            onChange={(e) => setOpcaoSelecinada(e.target.value)}
+          >
             <option>----</option>
-            <option>Raisy</option>
-            <option>Vitor</option>
+            <option value="{Raisy}">Raisy</option>
+            <option value="{Vitor}">Vitor</option>
           </select>
 
           <div className="flex justify-center">
