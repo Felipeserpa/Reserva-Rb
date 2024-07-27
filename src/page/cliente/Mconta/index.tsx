@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useId, useState } from "react";
 import Navbar from "../../../components/navbar";
 
 import logoBarb from "./../../../../public/images/logo.jpg";
@@ -12,6 +12,16 @@ export default function Mconta() {
   const handleClick = (nextPage: SetStateAction<string>) => {
     setCurrentPage(nextPage); // Update state on link click
   };
+
+  function editar() {
+    const userid = localStorage.getItem("@detailUser");
+
+    if (userid) {
+      let userDetailObject = JSON.parse(userid);
+      const uid = userDetailObject.uid;
+      console.log("UID do usuário:", uid);
+    }
+  }
 
   return (
     <div>
@@ -89,7 +99,12 @@ export default function Mconta() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-
+                  <button
+                    className="h-9 mt-3  bg-blue-600 rounded border-1 text-lg font-medium text-white p-1"
+                    onClick={() => editar()}
+                  >
+                    Editar
+                  </button>
                   <button className="h-9 mt-3  bg-blue-600 rounded border-1 text-lg font-medium text-white p-1">
                     Salvar Alterações
                   </button>

@@ -50,6 +50,7 @@ export default function cadastro() {
       await addDoc(collection(db, "users"), {
         nome: nome,
         email: email,
+        password: password,
         uid: user.uid,
 
         // Adicione outros campos conforme necessário
@@ -59,6 +60,7 @@ export default function cadastro() {
         uid: user.uid,
         email: user.email,
         nome: nome,
+        password: password,
       };
       localStorage.setItem("@detailUser", JSON.stringify(userData));
 
