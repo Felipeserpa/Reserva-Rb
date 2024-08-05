@@ -3,6 +3,7 @@ import { useState } from "react";
 import Modal from "react-modal";
 import { db } from "../../services/fireaseConection";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { create } from "@mui/material/styles/createTransitions";
 
 const customStyles = {
   content: {
@@ -53,6 +54,7 @@ export default function modal() {
 
       // Adicione o agendamento com o UID do usuário
       await addDoc(collection(db, "agUser"), {
+        created: new Date(),
         nome,
         tel,
         date,
