@@ -11,7 +11,7 @@ import AdminLogin from "./page/AdminLogin";
 import Sobre from "./page/sobre";
 import RecSenha from "./page/Login/RecSenha";
 import { Private } from "../src/routes/Private";
-import { PrivateAdmin } from "./routes/PrivateAdmin";
+import PrivateRoute from "./routes/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -41,9 +41,9 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: (
-      <PrivateAdmin>
+      <PrivateRoute path={"/admin"} element={<Admin />}>
         <Admin />
-      </PrivateAdmin>
+      </PrivateRoute>
     ),
   },
   {

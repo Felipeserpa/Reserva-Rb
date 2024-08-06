@@ -7,8 +7,8 @@ import logoBarb from "./../../../public/images/logo.jpg";
 import { zodResolver } from "@hookform/resolvers/zod";
 import styles from "./login.module.css";
 
-import { auth } from "../../services/fireaseConection";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../services/fireaseConection";
 
 const schema = z.object({
   email: z
@@ -44,15 +44,18 @@ export default function AdminLogin() {
       // Verifica se o usuário é um administrador
       const isAdmin = user.email === "admin@teste.com";
 
-      // Se for um administrador, redireciona para a página de admin
       if (isAdmin) {
+        // Se for um administrador, redireciona para a página de admin
         navigate("/admin");
+      } else {
+        // Caso contrário, redireciona para alguma outra página (se necessário)
+        navigate("/outra-rota");
       }
     } catch (error) {
       console.error("Erro ao fazer login:", error);
+      // Trate o erro conforme necessário (ex.: exiba uma mensagem de erro)
     }
   };
-
   return (
     <div className={styles.body}>
       <div className="grid justify-items-center mt-24">

@@ -4,36 +4,40 @@ import {
   useState,
   useEffect,
   SetStateAction,
+  useContext,
 } from "react";
 
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../services/fireaseConection";
 
 // Criar uma tipagem
-interface AuthContextData {
-  signed: boolean;
-  loadingAuth: boolean;
-  logout: () => void;
-  isAdmin?: boolean;
-}
 
+// Define a interface para o usuário
 interface User {
   uid: string;
   name: string | null;
   email: string | null;
 }
 
-export const AuthContext = createContext({} as AuthContextData);
+// Define a interface para o contexto de autenticação
+interface AuthContextData {
+  signed: boolean;
+  loadingAuth: boolean;
+  user: User | null;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => Promise<void>;
+  isAdmin: boolean; // Adicionamos a propriedade isAdmin
+}
 
-// Renomeie a declaração da função para AuthProvider
-export function AuthProvider({ children }: { children: ReactNode }) {
+// Crie o contexto de autenticação
+export const AuthContext = createContext<AuthContextData>(
+  {} as AuthContextData
+);
+
+// Componente AuthProvider (onde definimos o valor do contexto)
+export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loadingAuth, setLoadingAuth] = useState(true);
-
-  const logout = () => {
-    // Implementar lógica de logout (ex: auth.signOut())
-    setUser(null);
-  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -52,11 +56,41 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => unsubscribe();
   }, []);
 
-  console.log("Estado de Autenticação:", user); // Log para depuração
+  // Verifica se o usuário é um administrador com base no e-mail
+  const isAdmin = user?.email === "admin@teste.com";
+
+  const login = async (email: string, password: string) => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      console.error("Erro ao fazer login:", error);
+      // Trate o erro conforme necessário (ex.: exiba uma mensagem de erro)
+    }
+  };
+
+  const logout = async () => {
+    try {
+      await auth.signOut();
+      setUser(null);
+    } catch (error) {
+      console.error("Erro ao fazer logout:", error);
+    }
+  };
 
   return (
-    <AuthContext.Provider value={{ signed: !!user, loadingAuth, logout }}>
+    <AuthContext.Provider
+      value={{ signed: !!user, loadingAuth, user, login, logout, isAdmin }}
+    >
       {children}
     </AuthContext.Provider>
   );
+};
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
 }
+
+export default AuthProvider;
