@@ -17,6 +17,7 @@ interface User {
   uid: string;
   name: string | null;
   email: string | null;
+  isAdmin?: boolean;
 }
 
 // Define a interface para o contexto de autenticação
@@ -26,7 +27,7 @@ interface AuthContextData {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
-  isAdmin: boolean; // Adicionamos a propriedade isAdmin
+  isAdmin: boolean;
 }
 
 // Crie o contexto de autenticação
@@ -34,8 +35,12 @@ export const AuthContext = createContext<AuthContextData>(
   {} as AuthContextData
 );
 
+// Defina as propriedades do AuthProvider
+interface AuthProviderProps {
+  children: ReactNode;
+}
 // Componente AuthProvider (onde definimos o valor do contexto)
-export const AuthProvider: React.FC = ({ children }) => {
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loadingAuth, setLoadingAuth] = useState(true);
 

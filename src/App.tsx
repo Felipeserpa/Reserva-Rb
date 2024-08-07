@@ -6,12 +6,12 @@ import Login from "./page/Login";
 
 import Cliente from "./page/cliente";
 import Mconta from "./page/cliente/Mconta";
-import Admin from "./page/admin";
+import Dashboard from "./page/Dashboard";
 import AdminLogin from "./page/AdminLogin";
 import Sobre from "./page/sobre";
 import RecSenha from "./page/Login/RecSenha";
 import { Private } from "../src/routes/Private";
-import PrivateRoute from "./routes/PrivateRoute";
+import { PrivateDashboard } from "./routes/PrivateDashboard";
 
 const router = createBrowserRouter([
   {
@@ -39,11 +39,11 @@ const router = createBrowserRouter([
     element: <Mconta />,
   },
   {
-    path: "/admin",
+    path: "/Dashboard",
     element: (
-      <PrivateRoute path={"/admin"} element={<Admin />}>
-        <Admin />
-      </PrivateRoute>
+      <PrivateDashboard>
+        <Dashboard />
+      </PrivateDashboard>
     ),
   },
   {

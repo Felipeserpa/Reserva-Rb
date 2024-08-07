@@ -2,7 +2,7 @@ import Navbar from "../../components/navbarAdmin";
 
 import Footer from "../../components/footer";
 
-const admin = () => {
+const Dashboard = () => {
   return (
     <div>
       <Navbar />
@@ -26,4 +26,4 @@ const admin = () => {
     </div>
   );
 };
-export default admin;
+export default Dashboard;

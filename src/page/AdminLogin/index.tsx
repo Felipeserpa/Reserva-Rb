@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -46,7 +46,7 @@ export default function AdminLogin() {
 
       if (isAdmin) {
         // Se for um administrador, redireciona para a página de admin
-        navigate("/admin");
+        navigate("/Dashboard");
       } else {
         // Caso contrário, redireciona para alguma outra página (se necessário)
         navigate("/outra-rota");
