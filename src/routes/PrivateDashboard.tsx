@@ -1,32 +1,16 @@
 // PrivateRoute.tsx
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { auth } from "../services/fireaseConection";
 
 interface PrivateProps {
   children: ReactNode;
 }
 
 export function PrivateDashboard({ children }: PrivateProps): ReactNode {
-  const { signed, loadingAuth } = useAuth();
-  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+  const { signed, loadingAuth, isAdmin } = useAuth();
 
-  useEffect(() => {
-    if (signed) {
-      auth.currentUser
-        ?.getIdTokenResult()
-        .then((idTokenResult) => {
-          setIsAdmin(!!idTokenResult.claims.isAdmin);
-        })
-        .catch((error) => {
-          console.error("Erro ao obter token:", error);
-          setIsAdmin(false);
-        });
-    }
-  }, [signed]);
-
-  if (loadingAuth || isAdmin === null) {
+  if (loadingAuth) {
     return <div>Loading...</div>;
   }
 
