@@ -62,6 +62,7 @@ export default function modal() {
         time,
         userId: user.uid,
         opcaoSelecionada,
+        cortes,
       });
 
       console.log("Agendamento cadastrado com sucesso!");
@@ -137,6 +138,23 @@ export default function modal() {
             onChange={(e) => setTime(e.target.value)}
           />
           <label>Modelos de Cortes:</label>
+          <select
+            className="w-1/2 border-2 rounded-full border-zinc-950"
+            value={cortes}
+            onChange={(e) => setCortes(e.target.value)}
+          >
+            <option> ----</option>
+            <option value="Social">Social</option>
+            <option value="DeGraDê">DeGraDê</option>
+            <option value="Navalhado">Navalhado</option>
+            <option value="Tesoura">Tesoura</option>
+            <option value="Barba">Barba</option>
+            <option value="Sobrancelha">Sobrancelha</option>
+            <option value="Unhas">Unhas</option>
+            <option value="Kids">Kids</option>
+            <option value="Limpeza de Pele">Limpeza de Pele</option>
+            <option value="Cabelo+barba">Cabelo+Barba</option>
+          </select>
 
           <label>Profissional:</label>
 
