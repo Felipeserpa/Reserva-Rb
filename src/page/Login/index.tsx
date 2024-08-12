@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -98,8 +98,10 @@ export default function Login() {
             type="submit"
             className="h-9 mt-3  bg-blue-600 rounded border-1 text-lg font-medium text-white p-1 "
           >
+            {" "}
             Login
           </button>
+
           <Link to="/cadastro">
             <p className="font-medium py-2 text-slate-100  hover:text-slate-500">
               Não tem conta?Cadastre-se

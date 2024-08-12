@@ -26,6 +26,7 @@ export default function modal() {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [opcaoSelecionada, setOpcaoSelecinada] = useState("");
+  const [cortes, setCortes] = useState("");
 
   const auth = getAuth();
   const db = getFirestore();
@@ -135,6 +136,8 @@ export default function modal() {
             value={time}
             onChange={(e) => setTime(e.target.value)}
           />
+          <label>Modelos de Cortes:</label>
+
           <label>Profissional:</label>
 
           <select
