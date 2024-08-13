@@ -17,12 +17,6 @@ export default function Mconta() {
           {/* Conteúdo da coluna aqui */}
           <nav className=" flex-1 flex flex-col text-white">
             <a
-              className="nav-link flex p-3 hover:bg-gray-700 text-white  mb-2 text-base"
-              onClick={() => handleClick("page-1")}
-            >
-              <span className="text-sm"></span>
-            </a>
-            <a
               href="#"
               className="nav-link flex p-3 hover:bg-gray-700  mb-2 text-base"
               onClick={() => handleClick("page-2")}
@@ -32,6 +26,7 @@ export default function Mconta() {
             <a
               href="#"
               className="nav-link flex p-3 hover:bg-gray-700  mb-2 text-base"
+              onClick={() => handleClick("page-3")}
             >
               <span className="text-sm">Agendamentos e Reservas</span>
             </a>
@@ -40,18 +35,18 @@ export default function Mconta() {
 
         <div className="content flex-grow p-4  bg-white">
           <div
-            id="pagina-1"
-            className={currentPage === "page-1" ? "" : "hidden"}
-          >
-            <div></div>
-            {/* Add your page 1 content here */}
-          </div>
-
-          <div
             id="pagina-2"
             className={currentPage === "page-2" ? "" : "hidden"}
           >
             <h1>Conteúdo da Página 2</h1>
+            {/* Add your page 2 content here */}
+          </div>
+
+          <div
+            id="pagina-3"
+            className={currentPage === "page-3" ? "" : "hidden"}
+          >
+            <h1>Conteúdo da Página 3</h1>
             {/* Add your page 2 content here */}
           </div>
         </div>
