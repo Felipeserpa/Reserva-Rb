@@ -9,7 +9,7 @@ import styles from "./login.module.css";
 import logoBarb from "./../../../public/images/logo.jpg";
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "../../services/fireaseConection";
-
+import { toast } from "react-toastify";
 const schema = z.object({
   email: z
     .string()
@@ -44,11 +44,13 @@ export default function Login() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         navigate("/cliente");
+        toast.success("Seja Bem-Vindo ao  Barbearia Reserva!");
         const user = userCredential.user;
       })
       .catch((error) => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const errorMessage = error.message;
+        toast.error("Sua senha ou email pode estar incorreto!");
       });
   };
 
