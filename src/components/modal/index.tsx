@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import { db } from "../../services/fireaseConection";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { create } from "@mui/material/styles/createTransitions";
+import { toast } from "react-toastify";
 
 const customStyles = {
   content: {
@@ -65,6 +66,7 @@ export default function modal() {
         cortes,
       });
 
+      toast.success("Agendamento cadastrado com sucesso!");
       console.log("Agendamento cadastrado com sucesso!");
     } catch (error) {
       console.error("Erro ao cadastrar agendamento:", error);
