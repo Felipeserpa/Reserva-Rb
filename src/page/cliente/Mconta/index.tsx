@@ -1,12 +1,57 @@
 import { SetStateAction, useEffect, useState } from "react";
 import Navbar from "../../../components/navbar";
 
+import {
+  onSnapshot,
+  query,
+  orderBy,
+  where,
+  collection,
+} from "firebase/firestore";
+import { db } from "../../../services/fireaseConection";
+
 export default function Mconta() {
   const [currentPage, setCurrentPage] = useState("page-1");
+  const [user, setUser] = useState([]);
+  const {tarefas, setTarefas] = useState([]);
 
   const handleClick = (nextPage: SetStateAction<string>) => {
     setCurrentPage(nextPage); // Update state on link click
   };
+
+  useEffect(() => {
+    async function loadTarefas() {
+      const userDetail = localStorage.getItem("@detailUser");
+      if (userDetail) {
+        setUser(JSON.parse(userDetail));
+
+        const data = JSON.parse(userDetail);
+
+        const tarefaRef = collection(db, "agUser");
+        const q = query(
+          tarefaRef,
+          orderBy("created", "desc"),
+          where("userUid", "==", data?.uid)
+        );
+        const unsub = onSnapshot(q, (snapshot) => {
+         let lista: { id: string; tarefas: any; userUid: any; }[] = [];
+         snapshot.forEach((doc)=>{
+          lista.push({
+            id:doc.id,
+            tarefas:doc.data().tarefas,
+            userUid:doc.data().userUid
+          })
+         })
+         console.log(lista)
+       setTarefas(lista)
+
+
+
+        });
+      }
+    }
+    loadTarefas();
+  }, []);
 
   return (
     <div>
@@ -53,4 +98,7 @@ export default function Mconta() {
       </div>
     </div>
   );
+}
+function loadTarefas(): import("react").DependencyList | undefined {
+  throw new Error("Function not implemented.");
 }
