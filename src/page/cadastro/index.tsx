@@ -7,6 +7,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 const schema = z
   .object({
@@ -65,11 +66,13 @@ export default function cadastro() {
       localStorage.setItem("@detailUser", JSON.stringify(userData));
 
       console.log("Usuário registrado com sucesso!");
+      toast.success("Seja bem-vindo ao Sistema!");
       navigate("/cliente");
       return user;
 
       // Você pode adicionar mais lógica aqui, como redirecionar o usuário para outra página após o login bem-sucedido
     } catch (error) {
+      toast.error("Erro ao criar usuário!");
       console.error("Erro ao criar usuário:");
       // Tratar erros conforme necessário
     }
