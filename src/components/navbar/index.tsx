@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { getAuth, signOut } from "firebase/auth";
-import { auth } from "../../services/fireaseConection";
+import { auth } from "../../services/firebaseConection";
 import logoBarb from "./../../../public/images/logo.jpg";
 import { object } from "zod";
 

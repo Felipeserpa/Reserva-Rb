@@ -8,7 +8,7 @@ import {
 } from "react";
 
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../services/fireaseConection";
+import { auth } from "../services/firebaseConection";
 
 // Criar uma tipagem
 

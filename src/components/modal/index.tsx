@@ -1,7 +1,7 @@
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { useState } from "react";
 import Modal from "react-modal";
-import { db } from "../../services/fireaseConection";
+import { db } from "../../services/firebaseConection";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { create } from "@mui/material/styles/createTransitions";
 import { toast } from "react-toastify";
@@ -61,7 +61,7 @@ export default function modal() {
         tel,
         date,
         time,
-        userId: user.uid,
+        userUid: user.uid,
         opcaoSelecionada,
         cortes,
       });

@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import styles from "./login.module.css";
 import logoBarb from "./../../../public/images/logo.jpg";
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { auth } from "../../services/fireaseConection";
+import { auth } from "../../services/firebaseConection";
 import { toast } from "react-toastify";
 const schema = z.object({
   email: z

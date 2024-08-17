@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import styles from "./login.module.css";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../services/fireaseConection";
+import { auth } from "../../services/firebaseConection";
 
 const schema = z.object({
   email: z

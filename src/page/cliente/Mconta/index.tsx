@@ -8,12 +8,12 @@ import {
   where,
   collection,
 } from "firebase/firestore";
-import { db } from "../../../services/fireaseConection";
+import { db } from "../../../services/firebaseConection";
 
 export default function Mconta() {
   const [currentPage, setCurrentPage] = useState("page-1");
-  const [user, setUser] = useState([]);
-  const {tarefas, setTarefas] = useState([]);
+  const [user, setUser] = useState({});
+  const [tarefas, setTarefas] = useState([]);
 
   const handleClick = (nextPage: SetStateAction<string>) => {
     setCurrentPage(nextPage); // Update state on link click
@@ -23,9 +23,10 @@ export default function Mconta() {
     async function loadTarefas() {
       const userDetail = localStorage.getItem("@detailUser");
       if (userDetail) {
-        setUser(JSON.parse(userDetail));
-
         const data = JSON.parse(userDetail);
+        console.log("Dados do usuário:", data); // Verifique os dados do usuário
+
+        setUser(data);
 
         const tarefaRef = collection(db, "agUser");
         const q = query(
@@ -33,23 +34,32 @@ export default function Mconta() {
           orderBy("created", "desc"),
           where("userUid", "==", data?.uid)
         );
+        console.log("Consulta Firestore:", q); // Verifique a consulta
+
         const unsub = onSnapshot(q, (snapshot) => {
-         let lista: { id: string; tarefas: any; userUid: any; }[] = [];
-         snapshot.forEach((doc)=>{
-          lista.push({
-            id:doc.id,
-            tarefas:doc.data().tarefas,
-            userUid:doc.data().userUid
-          })
-         })
-         console.log(lista)
-       setTarefas(lista)
-
-
-
+          console.log("Snapshot size:", snapshot.size); // Verifique o tamanho do snapshot
+          if (snapshot.empty) {
+            console.log("Nenhum documento encontrado.");
+          } else {
+            let lista: { id: string; nome: any; userId: any }[] = [];
+            snapshot.forEach((doc) => {
+              console.log("Documento encontrado:", doc.data()); // Verifique os dados do documento
+              lista.push({
+                id: doc.id,
+                nome: doc.data().nome,
+                userId: doc.data().userId,
+              });
+            });
+            console.log("Lista de Tarefas:", lista);
+            setTarefas(lista); // Atualiza o estado de tarefas
+          }
         });
+
+        // Cleanup subscription on unmount
+        return () => unsub();
       }
     }
+
     loadTarefas();
   }, []);
 
@@ -84,6 +94,7 @@ export default function Mconta() {
             className={currentPage === "page-2" ? "" : "hidden"}
           >
             <h1>Conteúdo da Página 2</h1>
+
             {/* Add your page 2 content here */}
           </div>
 
@@ -98,7 +109,4 @@ export default function Mconta() {
       </div>
     </div>
   );
-}
-function loadTarefas(): import("react").DependencyList | undefined {
-  throw new Error("Function not implemented.");
 }
