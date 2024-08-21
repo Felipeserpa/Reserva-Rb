@@ -41,13 +41,15 @@ export default function Mconta() {
           if (snapshot.empty) {
             console.log("Nenhum documento encontrado.");
           } else {
-            let lista: { id: string; nome: any; userId: any }[] = [];
+            let lista: { id: string; nome: any; userId: any; cortes: any }[] =
+              [];
             snapshot.forEach((doc) => {
               console.log("Documento encontrado:", doc.data()); // Verifique os dados do documento
               lista.push({
                 id: doc.id,
                 nome: doc.data().nome,
                 userId: doc.data().userId,
+                cortes: doc.data().cortes,
               });
             });
             console.log("Lista de Tarefas:", lista);
@@ -98,12 +100,21 @@ export default function Mconta() {
             {/* Add your page 2 content here */}
           </div>
 
-          <div
-            id="pagina-3"
-            className={currentPage === "page-3" ? "" : "hidden"}
-          >
-            <h1>Conteúdo da Página 3</h1>
-            {/* Add your page 2 content here */}
+          <div className="columns-2">
+            <div
+              id="pagina-3"
+              className={currentPage === "page-3" ? "" : "hidden"}
+            >
+              <h1>Conteúdo da Página 3</h1>
+              {tarefas.map((item) => (
+                <article key={item.id} className="list">
+                  <p> {item.nome}</p>
+                  <p>{item.cortes}</p>
+                </article>
+              ))}
+
+              {/* Add your page 2 content here */}
+            </div>
           </div>
         </div>
       </div>
