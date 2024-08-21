@@ -9,7 +9,6 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { getAuth, signOut } from "firebase/auth";
 import { auth } from "../../services/firebaseConection";
 import logoBarb from "./../../../public/images/logo.jpg";
-import { object } from "zod";
 
 function Navbar() {
   // Exemplo de uso de useState, mas não de loadingauth

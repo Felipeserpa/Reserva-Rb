@@ -41,14 +41,26 @@ export default function Mconta() {
           if (snapshot.empty) {
             console.log("Nenhum documento encontrado.");
           } else {
-            let lista: { id: string; nome: any; userId: any; cortes: any }[] =
-              [];
+            let lista: {
+              id: string;
+              nome: any;
+              userId: any;
+              cortes: any;
+              date: any;
+              tel: any;
+              time: any;
+              opcaoSelecionada: any;
+            }[] = [];
             snapshot.forEach((doc) => {
               console.log("Documento encontrado:", doc.data()); // Verifique os dados do documento
               lista.push({
                 id: doc.id,
                 nome: doc.data().nome,
                 userId: doc.data().userId,
+                date: doc.data().date,
+                tel: doc.data().tel,
+                time: doc.data().time,
+                opcaoSelecionada: doc.data().opcaoSelecionada,
                 cortes: doc.data().cortes,
               });
             });
@@ -90,30 +102,34 @@ export default function Mconta() {
           </nav>
         </div>
 
-        <div className="content flex-grow p-4  bg-white">
+        <div className="content flex-grow p-4 bg-white">
           <div
             id="pagina-2"
             className={currentPage === "page-2" ? "" : "hidden"}
           >
             <h1>Conteúdo da Página 2</h1>
-
-            {/* Add your page 2 content here */}
+            {/* Adicione o conteúdo da página 2 aqui */}
           </div>
 
-          <div className="columns-2">
-            <div
-              id="pagina-3"
-              className={currentPage === "page-3" ? "" : "hidden"}
-            >
-              <h1>Conteúdo da Página 3</h1>
+          <div
+            id="pagina-3"
+            className={currentPage === "page-3" ? "" : "hidden"}
+          >
+            <p className="font-bold">Minhas Reservas</p>
+            <div className="flex flex-wrap gap-4">
               {tarefas.map((item) => (
-                <article key={item.id} className="list">
-                  <p> {item.nome}</p>
+                <article
+                  key={item.id}
+                  className="p-4 bg-white shadow-md rounded-lg flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4"
+                >
+                  <p className="font-bold">{item.nome}</p>
+                  <p>{item.tel}</p>
+                  <p>{item.date}</p>
+                  <p>{item.time}</p>
+                  <p>{item.opcaoSelecionada}</p>
                   <p>{item.cortes}</p>
                 </article>
               ))}
-
-              {/* Add your page 2 content here */}
             </div>
           </div>
         </div>
