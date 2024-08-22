@@ -1,8 +1,26 @@
 import Navbar from "../../components/navbarAdmin";
 
 import Footer from "../../components/footer";
+import { useEffect, useState } from "react";
 
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 const Dashboard = () => {
+  const [agUser, setAguser] = useState([]);
+
+  useEffect(() => {
+    async function loadAgenda() {
+      const db = getFirestore();
+      const querySnapshot = await getDocs(collection(db, "agUser"));
+      const users: ((prevState: never[]) => never[]) | { id: string }[] = [];
+      querySnapshot.forEach((doc) => {
+        users.push({ id: doc.id, ...doc.data() });
+      });
+      setAguser(users);
+      console.log(users);
+    }
+
+    loadAgenda();
+  }, []);
   return (
     <div>
       <Navbar />
@@ -22,7 +40,9 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <Footer />
+      <div className="mt-72">
+        <Footer />
+      </div>
     </div>
   );
 };
