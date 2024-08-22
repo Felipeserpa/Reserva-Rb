@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { Link } from "react-router-dom";
 import { VscAccount } from "react-icons/vsc";
 import { GrLogin } from "react-icons/gr";
 import logoBarb from "./../../../public/images/logo.jpg";
+import { AuthContext } from "../../contexts/AuthContext";
 const Navbar = () => {
   const [menuOpens, setMenuOpens] = useState(false);
 
   const [isLogged, setIslogged] = useState(true);
+
+  const { logout } = useContext(AuthContext);
 
   const toggle = () => {
     setMenuOpens(!menuOpens);
@@ -15,6 +18,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     setIslogged(false);
+    logout();
     alert("sair");
   };
 
