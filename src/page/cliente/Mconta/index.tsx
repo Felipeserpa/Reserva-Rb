@@ -122,12 +122,12 @@ export default function Mconta() {
                   key={item.id}
                   className="p-4 bg-white shadow-md rounded-lg flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4"
                 >
-                  <p className="font-bold">{item.nome}</p>
-                  <p>{item.tel}</p>
-                  <p>{item.date}</p>
-                  <p>{item.time}</p>
-                  <p>{item.opcaoSelecionada}</p>
-                  <p>{item.cortes}</p>
+                  <p className="font-bold"> Nome:{item.nome}</p>
+                  <p> Contato:{item.tel}</p>
+                  <p> Data:{item.date}</p>
+                  <p>Hora:{item.time}</p>
+                  <p>Barbeiro:{item.opcaoSelecionada}</p>
+                  <p>Corte:{item.cortes}</p>
                 </article>
               ))}
             </div>
