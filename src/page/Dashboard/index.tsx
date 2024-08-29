@@ -2,8 +2,10 @@ import Navbar from "../../components/navbarAdmin";
 
 import Footer from "../../components/footer";
 import { useEffect, useState } from "react";
+import Calendario from "../../components/calendarios";
 
 import { getFirestore, collection, getDocs } from "firebase/firestore";
+
 const Dashboard = () => {
   const [users, setAguser] = useState([]);
 
@@ -21,25 +23,11 @@ const Dashboard = () => {
 
     loadAgenda();
   }, []);
-  function buscarAgendamentos(
-    event: MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void {
-    throw new Error("Function not implemented.");
-  }
 
   return (
     <div>
       <Navbar />
-
-      <div>
-        <select onChange={(e) => setMes(e.target.value)}>
-          {/* Opções para selecionar o mês */}
-        </select>
-        <select onChange={(e) => setAno(e.target.value)}>
-          {/* Opções para selecionar o ano */}
-        </select>
-        <button onClick={buscarAgendamentos}>Buscar Agendamentos</button>
-      </div>
+      <Calendario />
 
       <div className=" text-white grid grid-rows-3 grid-flow-col gap-4">
         <div className="row-span-3 font-bold text-xl mt-2 ml-2">
