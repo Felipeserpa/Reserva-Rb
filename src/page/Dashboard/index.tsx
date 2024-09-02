@@ -2,32 +2,35 @@ import Navbar from "../../components/navbarAdmin";
 
 import Footer from "../../components/footer";
 import { useEffect, useState } from "react";
-import Calendario from "../../components/calendarios";
 
 import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { date } from "zod";
 
 const Dashboard = () => {
   const [users, setAguser] = useState([]);
-
   useEffect(() => {
     async function loadAgenda() {
-      const db = getFirestore();
-      const querySnapshot = await getDocs(collection(db, "agUser"));
-      const users: ((prevState: never[]) => never[]) | { id: string }[] = [];
-      querySnapshot.forEach((doc) => {
-        users.push({ id: doc.id, ...doc.data() });
-      });
-      setAguser(users);
-      console.log(users);
+      try {
+        const db = getFirestore();
+        const querySnapshot = await getDocs(collection(db, "agUser"));
+
+        // Ordenando os dados pela data (campo "date")
+        const sortedUsers = querySnapshot.docs
+          .map((doc) => ({ id: doc.id, ...doc.data() }))
+          .sort((a, b) => a.date.localeCompare(b.date));
+
+        setAguser(sortedUsers);
+        console.log(sortedUsers);
+      } catch (error) {
+        console.error("Erro ao carregar a agenda:", error);
+      }
     }
 
     loadAgenda();
   }, []);
-
   return (
     <div>
       <Navbar />
-      <Calendario />
 
       <div className=" text-white grid grid-rows-3 grid-flow-col gap-4">
         <div className="row-span-3 font-bold text-xl mt-2 ml-2">
@@ -45,7 +48,7 @@ const Dashboard = () => {
                 >
                   <p className="font-bold"> Nome:{item.nome}</p>
                   <p> Contato:{item.tel}</p>
-                  <p> Data:{item.date}</p>
+                  <p>Data:{item.date}</p>
                   <p>Hora:{item.time}</p>
                   <p>Barbeiro:{item.opcaoSelecionada}</p>
                   <p>Corte:{item.cortes}</p>
