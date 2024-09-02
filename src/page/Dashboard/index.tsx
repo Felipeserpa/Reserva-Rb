@@ -4,20 +4,26 @@ import Footer from "../../components/footer";
 import { useEffect, useState } from "react";
 
 import { getFirestore, collection, getDocs } from "firebase/firestore";
-import { date } from "zod";
 
 const Dashboard = () => {
   const [users, setAguser] = useState([]);
+
   useEffect(() => {
     async function loadAgenda() {
       try {
         const db = getFirestore();
         const querySnapshot = await getDocs(collection(db, "agUser"));
 
-        // Ordenando os dados pela data (campo "date")
+        // Ordenando os dados pela data e hora (campos "date" e "time")
         const sortedUsers = querySnapshot.docs
           .map((doc) => ({ id: doc.id, ...doc.data() }))
-          .sort((a, b) => a.date.localeCompare(b.date));
+          .sort((a, b) => {
+            const dateComparison = a.date.localeCompare(b.date);
+            if (dateComparison !== 0) {
+              return dateComparison;
+            }
+            return a.time.localeCompare(b.time);
+          });
 
         setAguser(sortedUsers);
         console.log(sortedUsers);
@@ -28,40 +34,39 @@ const Dashboard = () => {
 
     loadAgenda();
   }, []);
+
+  // Restante do seu componente...
+
   return (
     <div>
       <Navbar />
-
-      <div className=" text-white grid grid-rows-3 grid-flow-col gap-4">
+      <div className="text-white grid grid-rows-3 grid-flow-col gap-4">
         <div className="row-span-3 font-bold text-xl mt-2 ml-2">
-          Pagina Administrativa
+          Página Administrativa
         </div>
 
         <div className="row-span-2 col-span-2 font-bold text-xl mt-2">
-          Serviços Disponivel
-          <div className="  flex items-start grid-rows-3 grid-flow-col gap-4 mt-4">
-            <div className="flex flex-wrap gap-4">
-              {users.map((item) => (
-                <article
-                  key={item.id}
-                  className="p-2 shadow-md rounded-lg flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4"
-                >
-                  <p className="font-bold"> Nome:{item.nome}</p>
-                  <p> Contato:{item.tel}</p>
-                  <p>Data:{item.date}</p>
-                  <p>Hora:{item.time}</p>
-                  <p>Barbeiro:{item.opcaoSelecionada}</p>
-                  <p>Corte:{item.cortes}</p>
-                  <button>Deletar</button>
-                </article>
-              ))}
+          Serviços Disponíveis
+          <div className="flex items-start grid-rows-3 grid-flow-col gap-4 mt-4">
+            <div className="text-white">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {users.map((item) => (
+                  <article key={item.id} className="p-4 rounded-lg shadow-md">
+                    <p className="font-bold text-blue-600">Nome: {item.nome}</p>
+                    <p>Contato: {item.tel}</p>
+                    <p>Data: {item.date}</p>
+                    <p>Hora: {item.time}</p>
+                    <p>Barbeiro: {item.opcaoSelecionada}</p>
+                    <p>Corte: {item.cortes}</p>
+                    <button className="bg-red-500 text-white px-2 py-1 rounded-md">
+                      Deletar
+                    </button>
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="mt-72">
-        <Footer />
       </div>
     </div>
   );
