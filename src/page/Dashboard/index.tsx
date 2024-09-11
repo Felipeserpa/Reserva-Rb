@@ -1,9 +1,10 @@
 import Navbar from "../../components/navbarAdmin";
 
-import Footer from "../../components/footer";
 import { useEffect, useState } from "react";
 
 import { getFirestore, collection, getDocs } from "firebase/firestore";
+
+import { RiDeleteBin6Fill } from "react-icons/ri";
 
 const Dashboard = () => {
   const [users, setAguser] = useState([]);
@@ -35,6 +36,10 @@ const Dashboard = () => {
     loadAgenda();
   }, []);
 
+  function handleDelete() {
+    alert("delete");
+  }
+
   // Restante do seu componente...
 
   return (
@@ -58,8 +63,11 @@ const Dashboard = () => {
                     <p>Hora: {item.time}</p>
                     <p>Barbeiro: {item.opcaoSelecionada}</p>
                     <p>Corte: {item.cortes}</p>
-                    <button className="bg-red-500 text-white px-2 py-1 rounded-md">
-                      Deletar
+                    <button
+                      onClick={handleDelete}
+                      className="bg-red-500 text-white px-2 py-1 rounded-md"
+                    >
+                      <RiDeleteBin6Fill />
                     </button>
                   </article>
                 ))}
