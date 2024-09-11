@@ -2,9 +2,16 @@ import Navbar from "../../components/navbarAdmin";
 
 import { useEffect, useState } from "react";
 
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 
 import { RiDeleteBin6Fill } from "react-icons/ri";
+import { db } from "../../services/firebaseConection";
 
 const Dashboard = () => {
   const [users, setAguser] = useState([]);
@@ -36,10 +43,12 @@ const Dashboard = () => {
     loadAgenda();
   }, []);
 
-  function handleDelete() {
-    alert("delete");
+  async function handleDelete(id) {
+    const docRef = doc(db, "agUser", id);
+    await deleteDoc(docRef).then(() => {
+      alert("post deletado com sucesso");
+    });
   }
-
   // Restante do seu componente...
 
   return (
@@ -64,7 +73,7 @@ const Dashboard = () => {
                     <p>Barbeiro: {item.opcaoSelecionada}</p>
                     <p>Corte: {item.cortes}</p>
                     <button
-                      onClick={handleDelete}
+                      onClick={() => handleDelete(item.id)}
                       className="bg-red-500 text-white px-2 py-1 rounded-md"
                     >
                       <RiDeleteBin6Fill />
