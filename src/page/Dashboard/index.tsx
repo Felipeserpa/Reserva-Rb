@@ -49,7 +49,29 @@ const Dashboard = () => {
       alert("post deletado com sucesso");
     });
   }
-  // Restante do seu componente...
+  // Res tante do seu componente...
+  async function handleBuscar() {
+    try {
+      const db = getFirestore();
+      const querySnapshot = await getDocs(collection(db, "agUser"));
+
+      // Ordenando os dados pela data e hora (campos "date" e "time")
+      const sortedUsers = querySnapshot.docs
+        .map((doc) => ({ id: doc.id, ...doc.data() }))
+        .sort((a, b) => {
+          const dateComparison = a.date.localeCompare(b.date);
+          if (dateComparison !== 0) {
+            return dateComparison;
+          }
+          return a.time.localeCompare(b.time);
+        });
+
+      setAguser(sortedUsers);
+      console.log(sortedUsers);
+    } catch (error) {
+      console.error("Erro ao carregar a agenda:", error);
+    }
+  }
 
   return (
     <div>
@@ -62,6 +84,9 @@ const Dashboard = () => {
         <div className="row-span-2 col-span-2 font-bold text-xl mt-2">
           Serviços Disponíveis
           <div className="flex items-start grid-rows-3 grid-flow-col gap-4 mt-4">
+            <button onClick={() => handleBuscar()} className="text-white">
+              Buscar
+            </button>
             <div className="text-white">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {users.map((item) => (
