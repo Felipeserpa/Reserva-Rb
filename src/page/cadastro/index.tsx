@@ -54,7 +54,7 @@ export default function cadastro() {
         password: password,
         uid: user.uid,
 
-        // Adicione outros campos conforme necessário
+        // Adicione outros campos conforme necessário wPLktTHDArhK2xgbpFJ9QlxQnYc2
       });
       // Armazenar informações do usuário no localStorage
       const userData = {

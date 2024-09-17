@@ -50,6 +50,7 @@ const Dashboard = () => {
     });
   }
   // Res tante do seu componente...
+
   async function handleBuscar() {
     try {
       const db = getFirestore();
