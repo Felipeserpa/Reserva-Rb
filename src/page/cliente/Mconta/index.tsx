@@ -85,7 +85,7 @@ export default function Mconta() {
             id="pagina-3"
             className={currentPage === "page-3" ? "" : "hidden"}
           >
-            <p className="font-bold">Minhas Reservas</p>
+            <p className="font-bold">Meus Agendamentos</p>
             <div className="flex flex-wrap gap-4">
               {agendamentos.map((agendamento) => (
                 <article
@@ -93,8 +93,11 @@ export default function Mconta() {
                   className="p-4 bg-white shadow-md rounded-lg flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4"
                 >
                   <p className="font-bold"> Nome:{agendamento.nome}</p>
-                  Data:{agendamento.date}
-                  Hora: {agendamento.time}
+                  <p>Data:{agendamento.date}, </p>
+                  <p>Hora: {agendamento.time}, </p>
+                  <p> Contato:{agendamento.tel}</p>
+                  <p>Barbeiro:{agendamento.opcaoSelecionada}</p>
+                  <p>Corte:{agendamento.cortes}</p>
                 </article>
               ))}
             </div>
