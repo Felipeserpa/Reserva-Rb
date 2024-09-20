@@ -87,10 +87,15 @@ export default function modal() {
     <div>
       <button
         onClick={openModal}
-        className="ml-5  hover:bg-cyan-600 rounded-full w-24 mt-2 animate-bounce"
+        className="ml-5  hover:bg-yellow-600 rounded-full w-24 mt-2 font-bold  bg-white  border-zinc-950 text-black"
       >
         Agendar
       </button>
+      <span className="relative flex h-3 w-3">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+        <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+      </span>
+
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}

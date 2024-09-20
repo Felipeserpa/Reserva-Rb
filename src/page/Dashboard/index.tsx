@@ -1,5 +1,5 @@
 import Navbar from "../../components/navbarAdmin";
-
+import Modal from "../../components/modal";
 import { useEffect, useState } from "react";
 
 import {
@@ -78,16 +78,18 @@ const Dashboard = () => {
     <div>
       <Navbar />
       <div className="text-white grid grid-rows-3 grid-flow-col gap-4">
-        <div className="row-span-3 font-bold text-xl mt-2 ml-2">
-          Página Administrativa
-        </div>
+        <div className="row-span-3 font-bold text-xl mt-2 ml-2"></div>
 
         <div className="row-span-2 col-span-2 font-bold text-xl mt-2">
           Serviços Disponíveis
+          <button
+            onClick={() => handleBuscar()}
+            className=" ml-24  hover:bg-yellow-600   mt-2  border-zinc-950 text-white"
+          >
+            Buscar
+          </button>
+          <Modal></Modal>
           <div className="flex items-start grid-rows-3 grid-flow-col gap-4 mt-4">
-            <button onClick={() => handleBuscar()} className="text-white">
-              Buscar
-            </button>
             <div className="text-white">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {users.map((item) => (

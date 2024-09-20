@@ -4,47 +4,79 @@ import Navbar from "../../../components/navbar";
 import {
   onSnapshot,
   query,
-  orderBy,
   where,
   collection,
-  getDocs,
+  orderBy,
 } from "firebase/firestore";
+
 import { db } from "../../../services/firebaseConection";
+
+interface agendamentos {
+  opcaoSelecionada: ReactNode;
+  id: string;
+  nome: string;
+  data: string;
+  time: string;
+  tel: string;
+  cortes: string;
+  opcaoselecionada: string;
+}
 
 export default function Mconta() {
   const [currentPage, setCurrentPage] = useState("page-1");
 
-  const [agendamentos, setAgendamentos] = useState([]);
+  const [user, setUser] = useState({});
+
+  const [agendamento, setAgendamento] = useState<agendamentos[]>([]);
 
   const handleClick = (nextPage: SetStateAction<string>) => {
     setCurrentPage(nextPage); // Update state on link click
   };
-  useEffect(() => {
-    async function fetchAgendamentos() {
-      try {
-        const postsRef = collection(db, "agUser");
-        const querySnapshot = await getDocs(postsRef);
 
-        if (!querySnapshot.empty) {
-          const lista = querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            nome: doc.data().nome,
-            userId: doc.data().userId,
-            date: doc.data().date,
-            tel: doc.data().tel,
-            time: doc.data().time,
-            opcaoSelecionada: doc.data().opcaoSelecionada,
-            cortes: doc.data().cortes,
-            // Adicione outras propriedades conforme necessário
-          }));
-          setAgendamentos(lista);
-        }
-      } catch (error) {
-        console.error("Erro ao carregar os agendamentos:", error);
+  useEffect(() => {
+    async function loadTarefas() {
+      const userDetail = localStorage.getItem("@detailUser");
+      setUser(JSON.parse(userDetail));
+
+      if (userDetail) {
+        const data = JSON.parse(userDetail);
+
+        const tarefaRef = collection(db, "agUser");
+        const q = query(
+          tarefaRef,
+          orderBy("created", "desc"),
+          where("userUid", "==", data?.uid)
+        );
+        console.log(tarefaRef);
+
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+          const lista:
+            | ((prevState: agendamentos[]) => agendamentos[])
+            | { id: string; nome: string }[] = [];
+
+          snapshot.forEach((doc) => {
+            lista.push({
+              id: doc.id,
+              nome: doc.data().nome,
+              date: doc.data().date,
+              time: doc.data().time,
+              tel: doc.data().tel,
+              cortes: doc.data().cortes,
+              opcaoSelecionada: doc.data().opcaoSelecionada,
+            });
+          });
+
+          setAgendamento(lista);
+        });
+
+        // Retornar a função de cancelamento para desinscrever no momento certo
+        return () => {
+          unsubscribe();
+        };
       }
     }
 
-    fetchAgendamentos();
+    loadTarefas();
   }, []);
 
   return (
@@ -87,17 +119,22 @@ export default function Mconta() {
           >
             <p className="font-bold">Meus Agendamentos</p>
             <div className="flex flex-wrap gap-4">
-              {agendamentos.map((agendamento) => (
+              {agendamento.map((agendamentos) => (
                 <article
-                  key={agendamento.id}
+                  key={agendamentos.id}
                   className="p-4 bg-white shadow-md rounded-lg flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4"
                 >
-                  <p className="font-bold"> Nome:{agendamento.nome}</p>
-                  <p>Data:{agendamento.date}, </p>
-                  <p>Hora: {agendamento.time}, </p>
-                  <p> Contato:{agendamento.tel}</p>
-                  <p>Barbeiro:{agendamento.opcaoSelecionada}</p>
-                  <p>Corte:{agendamento.cortes}</p>
+                  <p className="font-bold"> Nome:{agendamentos.nome}</p>
+                  <p className="font-bold"> Data:{agendamentos.date}</p>
+                  <p className="font-bold"> Hora:{agendamentos.time}</p>
+                  <p className="font-bold"> Contato:{agendamentos.tel}</p>
+                  <p className="font-bold">
+                    {" "}
+                    Modelo de Corte:{agendamentos.cortes}
+                  </p>
+                  <p className="font-bold">
+                    Profissional:{agendamentos.opcaoSelecionada}
+                  </p>
                 </article>
               ))}
             </div>
