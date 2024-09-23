@@ -84,7 +84,7 @@ const Dashboard = () => {
           Serviços Disponíveis
           <button
             onClick={() => handleBuscar()}
-            className=" ml-24  hover:bg-yellow-600   mt-2  border-zinc-950 text-white"
+            className=" ml-24  hover:bg-yellow-600  rounded-full w-24 bg-white  mt-2  border-zinc-950 text-zinc-950"
           >
             Buscar
           </button>
