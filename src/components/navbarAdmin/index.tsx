@@ -5,6 +5,8 @@ import { VscAccount } from "react-icons/vsc";
 import { GrLogin } from "react-icons/gr";
 import logoBarb from "./../../../public/images/logo.jpg";
 import { AuthContext } from "../../contexts/AuthContext";
+import { toast } from "react-toastify";
+
 const Navbar = () => {
   const [menuOpens, setMenuOpens] = useState(false);
 
@@ -19,7 +21,7 @@ const Navbar = () => {
   const handleLogout = () => {
     setIslogged(false);
     logout();
-    alert("sair");
+    toast.success("Deslogado com sucessso!");
   };
 
   return (

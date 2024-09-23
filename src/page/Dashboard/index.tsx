@@ -2,6 +2,8 @@ import Navbar from "../../components/navbarAdmin";
 import Modal from "../../components/modal";
 import { useEffect, useState } from "react";
 
+import { toast } from "react-toastify";
+
 import {
   getFirestore,
   collection,
@@ -46,7 +48,7 @@ const Dashboard = () => {
   async function handleDelete(id) {
     const docRef = doc(db, "agUser", id);
     await deleteDoc(docRef).then(() => {
-      alert("post deletado com sucesso");
+      toast.success("Agendamento excluido com sucesso!");
     });
   }
   // Res tante do seu componente...

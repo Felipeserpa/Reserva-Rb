@@ -109,7 +109,7 @@ export default function Mconta() {
             id="pagina-2"
             className={currentPage === "page-2" ? "" : "hidden"}
           >
-            <h1>Conteúdo da Página 2</h1>
+            <h1></h1>
             {/* Adicione o conteúdo da página 2 aqui */}
           </div>
 
