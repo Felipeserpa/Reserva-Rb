@@ -9,6 +9,7 @@ import styles from "./login.module.css";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../services/firebaseConection";
+import { toast } from "react-toastify";
 
 const schema = z.object({
   email: z
@@ -47,6 +48,7 @@ export default function AdminLogin() {
       if (isAdmin) {
         // Se for um administrador, redireciona para a página de admin
         navigate("/Dashboard");
+        toast.success("Seja Bem-vindo(a)!");
       } else {
         // Caso contrário, redireciona para alguma outra página (se necessário)
         navigate("/outra-rota");
