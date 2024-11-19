@@ -32,7 +32,7 @@ const ClientPage = () => {
     const intervaloFuncionario2 = setInterval(() => {
       const agora = new Date();
       const horarioInicio2 = 9; // Funcionário 2 começa às 12h
-      const horarioFim2 = 20; // Funcionário 2 termina às 20h
+      const horarioFim2 = 18; // Funcionário 2 termina às 20h
       const horas = agora.getHours();
 
       const novoStatus2 =
@@ -59,20 +59,20 @@ const ClientPage = () => {
               alt="barbearia"
               style={{ width: 156 }}
             />
-            <p>
-              O serviço está atualmente: <strong>{status}</strong>
+            <p className="p-2 ml-3">
+              Serviço <strong>{status}</strong>
             </p>
             <Modal></Modal>
           </div>
           <div className="basis-1/4">
             <img
               src={foto02}
-              className="rounded-full mt-3 "
+              className="rounded-full mt-5 "
               alt="barbearia "
               style={{ width: 152 }}
             />
-            <p>
-              O serviço está atualmente: <strong>{statusFuncionario2}</strong>
+            <p className="p-2 ml-3">
+              Serviço <strong>{statusFuncionario2}</strong>
             </p>
             <Modal></Modal>
           </div>
