@@ -79,40 +79,38 @@ const Dashboard = () => {
   return (
     <div>
       <Navbar />
-      <div className="text-white grid grid-rows-3 grid-flow-col gap-4">
-        <div className="row-span-3 font-bold text-xl mt-2 ml-2"></div>
 
-        <div className="row-span-2 col-span-2 font-bold text-xl mt-2">
-          Serviços Disponíveis
-          <button
-            onClick={() => handleBuscar()}
-            className=" ml-24  hover:bg-yellow-600  rounded-full w-24 bg-white  mt-2  border-zinc-950 text-zinc-950"
-          >
-            Buscar
-          </button>
-          <Modal></Modal>
-          <div className="flex items-start grid-rows-3 grid-flow-col gap-4 mt-4">
-            <div className="text-white">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {users.map((item) => (
-                  <article key={item.id} className="p-4 rounded-lg shadow-md">
-                    <p className="font-bold text-blue-600">Nome: {item.nome}</p>
-                    <p>Contato: {item.tel}</p>
-                    <p>Data: {item.date}</p>
-                    <p>Hora: {item.time}</p>
-                    <p>Barbeiro: {item.opcaoSelecionada}</p>
-                    <p>Corte: {item.cortes}</p>
-                    <button
-                      onClick={() => handleDelete(item.id)}
-                      className="bg-red-500 text-white px-2 py-1 rounded-md"
-                    >
-                      <RiDeleteBin6Fill />
-                    </button>
-                  </article>
-                ))}
-              </div>
-            </div>
+      <div className="grid grid-cols-[15%_85%] h-screen">
+        <div className="bg-red-500">
+          <div>
+            <p className="mt-2 text-center">Serviços Disponíveis</p>
+            <button
+              onClick={() => handleBuscar()}
+              className=" ml-16  hover:bg-yellow-600  rounded-full w-24 bg-white  mt-2  border-zinc-950 text-zinc-950"
+            >
+              Atualizar
+            </button>
+
+            <Modal></Modal>
           </div>
+        </div>
+        <div className="bg-yellow-500">
+          {users.map((item) => (
+            <article key={item.id} className="p-4 rounded-lg shadow-md">
+              <p className="font-bold text-blue-600">Nome: {item.nome}</p>
+              <p>Contato: {item.tel}</p>
+              <p>Data: {item.date}</p>
+              <p>Hora: {item.time}</p>
+              <p>Barbeiro: {item.opcaoSelecionada}</p>
+              <p>Corte: {item.cortes}</p>
+              <button
+                onClick={() => handleDelete(item.id)}
+                className="bg-red-500 text-white px-2 py-1 rounded-md"
+              >
+                <RiDeleteBin6Fill />
+              </button>
+            </article>
+          ))}
         </div>
       </div>
     </div>
