@@ -13,6 +13,7 @@ import {
 } from "firebase/firestore";
 
 import { RiDeleteBin6Fill } from "react-icons/ri";
+import { FcApproval } from "react-icons/fc";
 import { db } from "../../services/firebaseConection";
 
 const Dashboard = () => {
@@ -81,23 +82,29 @@ const Dashboard = () => {
       <Navbar />
 
       <div className="grid grid-cols-[15%_85%] h-screen">
-        <div className="bg-red-500">
+        <div className="bg-yellow-200">
           <div>
-            <p className="mt-2 text-center">Serviços Disponíveis</p>
+            <p className="mt-2 text-center font-bold">Serviços Disponíveis</p>
             <button
               onClick={() => handleBuscar()}
-              className=" ml-16  hover:bg-yellow-600  rounded-full w-24 bg-white  mt-2  border-zinc-950 text-zinc-950"
+              className=" ml-16
+              
+                hover:bg-yellow-600  rounded-full w-24 bg-white font-bold  mt-2  border-zinc-950 text-zinc-950"
             >
               Atualizar
             </button>
-
-            <Modal></Modal>
+            <div className="ml-11">
+              <Modal></Modal>
+            </div>
           </div>
         </div>
-        <div className="bg-yellow-500">
+        <div className="bg-yellow-400">
           {users.map((item) => (
-            <article key={item.id} className="p-4 rounded-lg shadow-md">
-              <p className="font-bold text-blue-600">Nome: {item.nome}</p>
+            <article
+              key={item.id}
+              className="p-4 rounded-lg shadow-md font-bold"
+            >
+              <p className="font-bold text-blue-500">Nome: {item.nome}</p>
               <p>Contato: {item.tel}</p>
               <p>Data: {item.date}</p>
               <p>Hora: {item.time}</p>
@@ -108,6 +115,12 @@ const Dashboard = () => {
                 className="bg-red-500 text-white px-2 py-1 rounded-md"
               >
                 <RiDeleteBin6Fill />
+              </button>
+              <button
+                onClick={() => handleDelete(item.id)}
+                className="text-white px-2 py-1  ml-2 rounded-md bg-lime-600"
+              >
+                <FcApproval />
               </button>
             </article>
           ))}
