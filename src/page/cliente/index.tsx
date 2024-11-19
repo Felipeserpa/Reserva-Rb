@@ -13,8 +13,8 @@ const ClientPage = () => {
   useEffect(() => {
     const intervalo = setInterval(() => {
       const agora = new Date();
-      const horarioInicio = 8; // Horário de abertura
-      const horarioFim = 11; // Horário de fechamento
+      const horarioInicio = 10; // Horário de abertura
+      const horarioFim = 22; // Horário de fechamento
       const horas = agora.getHours();
 
       // Atualiza o status com base no horário
@@ -31,7 +31,7 @@ const ClientPage = () => {
   useEffect(() => {
     const intervaloFuncionario2 = setInterval(() => {
       const agora = new Date();
-      const horarioInicio2 = 12; // Funcionário 2 começa às 12h
+      const horarioInicio2 = 9; // Funcionário 2 começa às 12h
       const horarioFim2 = 20; // Funcionário 2 termina às 20h
       const horas = agora.getHours();
 
