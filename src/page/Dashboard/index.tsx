@@ -10,6 +10,9 @@ import {
   getDocs,
   doc,
   deleteDoc,
+  addDoc,
+  getDoc,
+  setDoc,
 } from "firebase/firestore";
 
 import { RiDeleteBin6Fill } from "react-icons/ri";
@@ -18,6 +21,7 @@ import { db } from "../../services/firebaseConection";
 
 const Dashboard = () => {
   const [users, setAguser] = useState([]);
+  const [userData, setUserData] = useState([]);
 
   useEffect(() => {
     async function loadAgenda() {
@@ -46,7 +50,7 @@ const Dashboard = () => {
     loadAgenda();
   }, []);
 
-  async function handleDelete(id) {
+  async function handleDelete(id: string) {
     const docRef = doc(db, "agUser", id);
     await deleteDoc(docRef).then(() => {
       toast.success("Agendamento excluido com sucesso!");
@@ -76,6 +80,30 @@ const Dashboard = () => {
       console.error("Erro ao carregar a agenda:", error);
     }
   }
+  // armezenar os dados do client em outro banco com outro id
+  const handleArmazenar = async (userId) => {
+    try {
+      // Referência ao documento do usuário na tabela original
+      const userRef = doc(db, "agUser", userId);
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+
+        // Referência ao novo documento na outra tabela
+        const newTableRef = doc(db, "relatorios", userId);
+
+        // Copiando os dados para a nova tabela
+        await setDoc(newTableRef, userData);
+
+        console.log("Dados movidos com sucesso!");
+      } else {
+        console.log("Usuário não encontrado!");
+      }
+    } catch (error) {
+      console.error("Erro ao mover dados:", error);
+    }
+  };
 
   return (
     <div>
@@ -117,7 +145,7 @@ const Dashboard = () => {
                 <RiDeleteBin6Fill />
               </button>
               <button
-                onClick={() => handleDelete(item.id)}
+                onClick={() => handleArmazenar(item.id)}
                 className="text-white px-2 py-1  ml-2 rounded-md bg-lime-600"
               >
                 <FcApproval />
