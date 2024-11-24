@@ -13,6 +13,7 @@ import {
   addDoc,
   getDoc,
   setDoc,
+  Timestamp,
 } from "firebase/firestore";
 
 import { RiDeleteBin6Fill } from "react-icons/ri";
@@ -80,7 +81,7 @@ const Dashboard = () => {
       console.error("Erro ao carregar a agenda:", error);
     }
   }
-  // armezenar os dados do client em outro banco com outro id
+  // armezenar os dados do client em outro banco com outro
   const handleArmazenar = async (userId) => {
     try {
       // Referência ao documento do usuário na tabela original
@@ -97,6 +98,15 @@ const Dashboard = () => {
         await setDoc(newTableRef, userData);
 
         console.log("Dados movidos com sucesso!");
+        //cria um copia dos dados dos usuarios
+        const reportref = collection(db, "relatorios");
+        await addDoc(reportref, {
+          userId,
+          action: "dados movidos",
+          timestamp: new Date(),
+          orginalData: userData,
+        });
+        await deleteDoc(userRef);
       } else {
         console.log("Usuário não encontrado!");
       }
