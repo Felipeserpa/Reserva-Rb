@@ -1,9 +1,9 @@
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { useState } from "react";
 import Modal from "react-modal";
-import { db } from "../../services/firebaseConection";
+
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { create } from "@mui/material/styles/createTransitions";
+
 import { toast } from "react-toastify";
 
 const customStyles = {
@@ -19,7 +19,6 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 export default function modal() {
-  let subtitle: HTMLHeadingElement | null;
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const [nome, setNome] = useState("");
@@ -38,7 +37,6 @@ export default function modal() {
 
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
-    subtitle.style.color = "#0004e2";
   }
 
   function closeModal() {
@@ -103,7 +101,7 @@ export default function modal() {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Seja Bem-vindo</h2>
+        <h2>Seja Bem-vindo</h2>
 
         <div className="font-mono text-lg"> Reserva Barbearia</div>
         <form onSubmit={handleFormSubmit} className="flex flex-col w-96">
