@@ -1,4 +1,4 @@
-import { json, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { VscAccount } from "react-icons/vsc";
 import { GrLogin } from "react-icons/gr";
@@ -10,11 +10,15 @@ import { getAuth, signOut } from "firebase/auth";
 import { auth } from "../../services/firebaseConection";
 import logoBarb from "./../../../public/images/logo.jpg";
 
+interface Users {
+  nome: string;
+}
+
 function Navbar() {
   // Exemplo de uso de useState, mas não de loadingauth
   const [menuOpens, setMenuOpens] = useState(false);
 
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState<Users>();
 
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -120,7 +124,7 @@ function Navbar() {
 
             <Link to="/cliente" className="text-white mr-20">
               <VscAccount className="ml-2" size={25} />
-              <h1>Seja bem-vindo {user.nome}</h1>
+              <h1>Seja bem-vindo {user?.nome}</h1>
             </Link>
             <div>
               <button onClick={handleLogout} className="text-white">
