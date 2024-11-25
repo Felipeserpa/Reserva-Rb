@@ -1,6 +1,10 @@
 import { Modal, Box, Typography } from "@mui/material";
 
-const RecSenha = ({ open, onClose }) => {
+interface RecSenhaProps {
+  open: boolean;
+  onClose: () => void; // Função que não recebe argumentos e não retorna nada
+}
+const RecSenha: React.FC<RecSenhaProps> = ({ open, onClose }) => {
   const style = {
     position: "absolute",
     top: "50%",
