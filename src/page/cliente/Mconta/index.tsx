@@ -23,7 +23,7 @@ interface agendamentos {
 
 export default function Mconta() {
   const [currentPage, setCurrentPage] = useState("page-1");
-  const [user, setUser] = useState<{ uid: string } | null>(null);
+  const [, setUser] = useState<{ uid: string } | null>(null);
   const [agendamento, setAgendamento] = useState<agendamentos[]>([]);
 
   const handleClick = (nextPage: string) => {
