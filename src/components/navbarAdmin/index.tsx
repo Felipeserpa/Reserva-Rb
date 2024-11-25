@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 const Navbar = () => {
   const [menuOpens, setMenuOpens] = useState(false);
 
-  const [isLogged, setIslogged] = useState(true);
+  const [, setIslogged] = useState(true);
 
   const { logout } = useContext(AuthContext);
 
