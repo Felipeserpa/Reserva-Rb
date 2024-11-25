@@ -86,7 +86,7 @@ export default function AdminLogin() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <p className="text-slate-300">{errors.email?.message}</p>
+          <p className="text-slate-300">{String(errors?.message || "")}</p>
 
           <label className="p-1 text-slate-300">Senha:</label>
 
@@ -100,7 +100,7 @@ export default function AdminLogin() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <p className="text-slate-300">{errors.password?.message}</p>
+          <p className="text-slate-300">{String(errors?.message || "")}</p>
 
           <button
             type="submit"
