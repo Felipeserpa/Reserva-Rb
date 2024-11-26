@@ -1,141 +1,132 @@
 import Navbar from "../../components/navbarAdmin";
 import Modal from "../../components/modal";
 import { useEffect, useState } from "react";
-
 import { toast } from "react-toastify";
-
 import {
-  getFirestore,
   collection,
   getDocs,
   doc,
   deleteDoc,
-  addDoc,
   getDoc,
   setDoc,
-  Timestamp,
+  addDoc,
 } from "firebase/firestore";
-
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { FcApproval } from "react-icons/fc";
 import { db } from "../../services/firebaseConection";
 
+interface User {
+  id: string;
+  nome: string;
+  tel: string;
+  date: string;
+  time: string;
+  opcaoSelecionada: string;
+  cortes: string;
+}
+
 const Dashboard = () => {
-  const [users, setAguser] = useState([]);
-  const [userData, setUserData] = useState([]);
+  const [users, setUsers] = useState<User[]>([]);
 
+  // Função para ordenar os dados
+  const sortUsersByDateAndTime = (usersArray: any[]) => {
+    return usersArray.sort((a, b) => {
+      const dateComparison = a.date.localeCompare(b.date);
+      if (dateComparison !== 0) return dateComparison;
+      return a.time.localeCompare(b.time);
+    });
+  };
+
+  // Carregar agenda inicial
   useEffect(() => {
-    async function loadAgenda() {
-      try {
-        const db = getFirestore();
-        const querySnapshot = await getDocs(collection(db, "agUser"));
-
-        // Ordenando os dados pela data e hora (campos "date" e "time")
-        const sortedUsers = querySnapshot.docs
-          .map((doc) => ({ id: doc.id, ...doc.data() }))
-          .sort((a, b) => {
-            const dateComparison = a.date.localeCompare(b.date);
-            if (dateComparison !== 0) {
-              return dateComparison;
-            }
-            return a.time.localeCompare(b.time);
-          });
-
-        setAguser(sortedUsers);
-        console.log(sortedUsers);
-      } catch (error) {
-        console.error("Erro ao carregar a agenda:", error);
-      }
-    }
-
     loadAgenda();
   }, []);
 
-  async function handleDelete(id: string) {
-    const docRef = doc(db, "agUser", id);
-    await deleteDoc(docRef).then(() => {
-      toast.success("Agendamento excluido com sucesso!");
-    });
-  }
-  // Res tante do seu componente...
-
-  async function handleBuscar() {
+  // Função para carregar agendamentos
+  const loadAgenda = async () => {
     try {
-      const db = getFirestore();
       const querySnapshot = await getDocs(collection(db, "agUser"));
-
-      // Ordenando os dados pela data e hora (campos "date" e "time")
-      const sortedUsers = querySnapshot.docs
-        .map((doc) => ({ id: doc.id, ...doc.data() }))
-        .sort((a, b) => {
-          const dateComparison = a.date.localeCompare(b.date);
-          if (dateComparison !== 0) {
-            return dateComparison;
-          }
-          return a.time.localeCompare(b.time);
-        });
-
-      setAguser(sortedUsers);
-      console.log(sortedUsers);
+      const usersData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      const sortedUsers = sortUsersByDateAndTime(usersData);
+      setUsers(sortedUsers);
     } catch (error) {
       console.error("Erro ao carregar a agenda:", error);
+      toast.error("Erro ao carregar a agenda.");
     }
-  }
-  // armezenar os dados do client em outro banco com outro
-  const handleArmazenar = async (userId) => {
+  };
+
+  // Função para deletar agendamento
+  const handleDelete = async (id: string) => {
     try {
-      // Referência ao documento do usuário na tabela original
+      await deleteDoc(doc(db, "agUser", id));
+      toast.success("Agendamento excluído com sucesso!");
+      setUsers(users.filter((user) => user.id !== id));
+    } catch (error) {
+      console.error("Erro ao excluir agendamento:", error);
+      toast.error("Erro ao excluir o agendamento.");
+    }
+  };
+
+  // Função para mover dados para outra coleção
+  const handleArmazenar = async (userId: string) => {
+    try {
       const userRef = doc(db, "agUser", userId);
       const userSnap = await getDoc(userRef);
 
-      if (userSnap.exists()) {
-        const userData = userSnap.data();
-
-        // Referência ao novo documento na outra tabela
-        const newTableRef = doc(db, "relatorios", userId);
-
-        // Copiando os dados para a nova tabela
-        await setDoc(newTableRef, userData);
-
-        console.log("Dados movidos com sucesso!");
-        //cria um copia dos dados dos usuarios
-        const reportref = collection(db, "relatorios");
-        await addDoc(reportref, {
-          userId,
-          action: "dados movidos",
-          timestamp: new Date(),
-          orginalData: userData,
-        });
-        await deleteDoc(userRef);
-      } else {
-        console.log("Usuário não encontrado!");
+      if (!userSnap.exists()) {
+        toast.error("Usuário não encontrado.");
+        return;
       }
+
+      const userData = userSnap.data();
+      const newTableRef = doc(db, "relatorios", userId);
+
+      // Mover os dados para a nova coleção
+      await setDoc(newTableRef, userData);
+      toast.success("Dados movidos com sucesso!");
+
+      // Adicionar log de ação
+      const reportRef = collection(db, "relatorios");
+      await addDoc(reportRef, {
+        userId,
+        action: "Dados movidos",
+        timestamp: new Date(),
+        originalData: userData,
+      });
+
+      // Deletar o documento original
+      await deleteDoc(userRef);
+      setUsers(users.filter((user) => user.id !== userId));
     } catch (error) {
       console.error("Erro ao mover dados:", error);
+      toast.error("Erro ao mover dados.");
     }
   };
 
   return (
     <div>
       <Navbar />
-
       <div className="grid grid-cols-[15%_85%] h-screen">
+        {/* Sidebar */}
         <div className="bg-yellow-200">
           <div>
             <p className="mt-2 text-center font-bold">Serviços Disponíveis</p>
             <button
-              onClick={() => handleBuscar()}
-              className=" ml-16
-              
-                hover:bg-yellow-600  rounded-full w-24 bg-white font-bold  mt-2  border-zinc-950 text-zinc-950"
+              onClick={loadAgenda}
+              className="ml-16 hover:bg-yellow-600 rounded-full w-24 bg-white font-bold mt-2 border-zinc-950 text-zinc-950"
             >
               Atualizar
             </button>
             <div className="ml-11">
-              <Modal></Modal>
+              <Modal />
             </div>
           </div>
         </div>
+
+        {/* Lista de usuários */}
         <div className="bg-yellow-400">
           {users.map((item) => (
             <article
@@ -156,7 +147,7 @@ const Dashboard = () => {
               </button>
               <button
                 onClick={() => handleArmazenar(item.id)}
-                className="text-white px-2 py-1  ml-2 rounded-md bg-lime-600"
+                className="text-white px-2 py-1 ml-2 rounded-md bg-lime-600"
               >
                 <FcApproval />
               </button>
@@ -167,4 +158,5 @@ const Dashboard = () => {
     </div>
   );
 };
+
 export default Dashboard;

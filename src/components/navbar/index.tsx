@@ -18,7 +18,7 @@ function Navbar() {
   // Exemplo de uso de useState, mas não de loadingauth
   const [menuOpens, setMenuOpens] = useState(false);
 
-  const [user, setUser] = useState<Users>();
+  const [users, setUser] = useState<Users>();
 
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -31,6 +31,7 @@ function Navbar() {
     try {
       await signOut(auths);
       const storedUserId = localStorage.getItem("currentUser") ?? "";
+
       if (currentUser && currentUser.uid === storedUserId) {
         // Continue com o processo de logout
         navigate("/cliente");
@@ -124,7 +125,7 @@ function Navbar() {
 
             <Link to="/cliente" className="text-white mr-20">
               <VscAccount className="ml-2" size={25} />
-              <h1>Seja bem-vindo {user?.nome}</h1>
+              <h1>Seja bem-vindo {users?.nome}</h1>
             </Link>
             <div>
               <button onClick={handleLogout} className="text-white">

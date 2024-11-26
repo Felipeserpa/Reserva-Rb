@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -43,17 +43,15 @@ export default function Login() {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        navigate("/cliente");
-        toast.success("Seja Bem-Vindo ao  Barbearia Reserva!");
         const user = userCredential.user;
+        localStorage.setItem("@detailUser", JSON.stringify(user));
+        navigate("/cliente");
+        toast.success(`Bem-vindo, ${user.email}!`);
       })
-      .catch((error) => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const errorMessage = error.message;
+      .catch((_error) => {
         toast.error("Sua senha ou email pode estar incorreto!");
       });
   };
-
   return (
     <div className={styles.body}>
       <div className="grid justify-items-center mt-24">
@@ -80,7 +78,7 @@ export default function Login() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <p className="text-slate-300">{errors.email?.message}</p>
+          <p className="text-slate-300">{String(errors?.message || "")}</p>
 
           <label className="p-1 text-slate-300">Senha:</label>
 
@@ -94,7 +92,7 @@ export default function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <p className="text-slate-300">{errors.password?.message}</p>
+          <p className="text-slate-300">{String(errors?.message || "")}</p>
 
           <button
             type="submit"

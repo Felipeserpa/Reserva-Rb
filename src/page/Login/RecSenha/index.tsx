@@ -1,17 +1,20 @@
-import React from "react";
-
 import { useState } from "react";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import logoBarb from "./../../../../public/images/logo.jpg";
 import { useNavigate } from "react-router-dom";
 import RecSenhas from "./../../../components/modal/RecSenha";
+import { useForm } from "react-hook-form";
 
 export default function recSenha() {
   const [email, setEmail] = useState("");
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const {
+    formState: { errors },
+  } = useForm({});
+
+  const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
     const auth = getAuth();
@@ -21,9 +24,8 @@ export default function recSenha() {
           navigate("/login");
         }, 15000);
       })
-      .catch((error) => {
+      .catch((_error) => {
         console.log(" errorCode = error.code");
-        const errorMessage = error.message;
       });
   };
 
@@ -61,7 +63,7 @@ export default function recSenha() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <p className="text-slate-300">{Error.email?.message}</p>
+            <p className="text-slate-300">{String(errors?.message || "")}</p>
 
             <button
               onClick={handleOpen}
