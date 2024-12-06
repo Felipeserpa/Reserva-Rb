@@ -48,50 +48,52 @@ const ClientPage = () => {
   return (
     <div>
       <Navbar />
-
-      <div className=" text-white">
-        <div className="flex flex-row mr-60 ">
-          <div className="relative h-32 w-64 ...">
-            <div className="absolute inset-y-0 left-0 w-16"></div>
-          </div>
-          <div className="basis-1/4 ml-10 mx-8 mt-2">
+      <div className="text-white flex flex-col items-center">
+        <div className="flex flex-wrap justify-center lg:justify-between gap-6 p-4 w-full max-w-6xl">
+          {/* Primeiro Item */}
+          <div className="flex flex-col items-center basis-full sm:basis-1/3 lg:basis-1/4">
             <img
               src={foto01}
-              className="rounded-full  mt-3 "
+              className="rounded-full mt-3"
               alt="barbearia"
-              style={{ width: 150 }}
+              style={{ width: "50%" }}
             />
-            <p className="p-2 ml-3">
+            <p className="p-2 text-center">
               Serviço <strong>{status}</strong>
             </p>
-            <Modal></Modal>
+            <Modal />
           </div>
-          <div className="basis-1/4">
+
+          {/* Segundo Item */}
+          <div className="flex flex-col items-center basis-full sm:basis-1/3 lg:basis-1/4">
             <img
               src={foto03}
-              className="rounded-full mt-5 "
-              alt="barbearia "
-              style={{ width: 152 }}
+              className="rounded-full mt-5"
+              alt="barbearia"
+              style={{ width: "50%" }}
             />
-            <p className="p-2 ml-3">
+            <p className="p-2 text-center">
               Serviço <strong>{statusFuncionario2}</strong>
             </p>
-            <Modal></Modal>
+            <Modal />
           </div>
-          <div className="basis-1/4">
+
+          {/* Terceiro Item */}
+          <div className="flex flex-col items-center basis-full sm:basis-1/3 lg:basis-1/4">
             <img
               src={foto02}
-              className="rounded-full mt-5 "
-              alt="barbearia "
-              style={{ width: 152 }}
+              className="rounded-full mt-5"
+              alt="barbearia"
+              style={{ width: "50%" }}
             />
-            <p className="p-2 ml-3">
+            <p className="p-2 text-center">
               Serviço <strong>{statusFuncionario2}</strong>
             </p>
-            <Modal></Modal>
+            <Modal />
           </div>
         </div>
-        <div className="mt-40">
+
+        <div className="mt-20 sm:mt-40 w-full">
           <Footer />
         </div>
       </div>
