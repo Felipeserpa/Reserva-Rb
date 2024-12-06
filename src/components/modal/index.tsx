@@ -1,10 +1,11 @@
 import { addDoc, collection, getFirestore } from "firebase/firestore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "react-modal";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import { toast } from "react-toastify";
+import React from "react";
 
 const customStyles = {
   content: {
@@ -31,6 +32,9 @@ export default function modal() {
   const auth = getAuth();
   const db = getFirestore();
 
+  //tempo para fechar o modal
+  const tempoParaFechar = 25000;
+
   function openModal() {
     setIsOpen(true);
   }
@@ -42,6 +46,15 @@ export default function modal() {
   function closeModal() {
     setIsOpen(false);
   }
+
+  useEffect(() => {
+    if (modalIsOpen) {
+      const timeer = setTimeout(() => {
+        setIsOpen(false);
+      }, tempoParaFechar);
+      return () => clearTimeout(timeer);
+    }
+  }, [modalIsOpen]);
 
   const handleFormSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -65,6 +78,7 @@ export default function modal() {
       });
 
       toast.success("Agendamento cadastrado com sucesso!");
+
       console.log("Agendamento cadastrado com sucesso!");
     } catch (error) {
       console.error("Erro ao cadastrar agendamento:", error);

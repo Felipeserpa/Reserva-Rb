@@ -5,7 +5,7 @@ import {
   useEffect,
   useContext,
 } from "react";
-
+import React from "react";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../services/firebaseConection";
 

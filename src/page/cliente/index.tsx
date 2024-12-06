@@ -1,10 +1,12 @@
 import Modal from "../../components/modal";
 
 import Navbar from "../../components/navbar";
-import foto01 from "./../../../public/images/foto01.jpg";
-import foto02 from "./../../../public/images/foto02.jpg";
+import foto01 from "./../../../public/images/foto1.jpg";
+import foto02 from "./../../../public/images/foto2.jpg";
+import foto03 from "./../../../public/images/foto3.jpg";
 import Footer from "../../components/footer";
 import { useEffect, useState } from "react";
+import React from "react";
 
 const ClientPage = () => {
   const [status, setStatus] = useState("Offline"); // Inicializa o status como "Offline"
@@ -57,10 +59,22 @@ const ClientPage = () => {
               src={foto01}
               className="rounded-full  mt-3 "
               alt="barbearia"
-              style={{ width: 156 }}
+              style={{ width: 150 }}
             />
             <p className="p-2 ml-3">
               Serviço <strong>{status}</strong>
+            </p>
+            <Modal></Modal>
+          </div>
+          <div className="basis-1/4">
+            <img
+              src={foto03}
+              className="rounded-full mt-5 "
+              alt="barbearia "
+              style={{ width: 152 }}
+            />
+            <p className="p-2 ml-3">
+              Serviço <strong>{statusFuncionario2}</strong>
             </p>
             <Modal></Modal>
           </div>
