@@ -45,7 +45,7 @@ export default function modal() {
   const db = getFirestore();
 
   //tempo para fechar o modal
-  const tempoParaFechar = 25000;
+  const tempoParaFechar = 30000;
 
   //buscar ultimo agendamento.
   const openModal = async () => {
@@ -96,11 +96,6 @@ export default function modal() {
   const handleFormSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
-    if (!agendamentoId) {
-      toast.error("Nenhum agendamento para atualizar.");
-      return;
-    }
-
     try {
       const user = auth.currentUser;
       if (!user) {
@@ -122,8 +117,16 @@ export default function modal() {
       toast.success("Agendamento cadastrado com sucesso!");
 
       console.log("Agendamento cadastrado com sucesso!");
+      setNome("");
+      setTel("(81)");
+      setDate("");
+      setTime("");
+      setCortes("");
+      setOpcaoSelecinada("");
+      closeModal();
     } catch (error) {
       console.error("Erro ao cadastrar agendamento:", error);
+      toast.error("Erro ao cadastrar agendamento.");
     }
   };
 
