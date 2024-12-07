@@ -9,6 +9,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { getAuth, signOut } from "firebase/auth";
 import { auth } from "../../services/firebaseConection";
 import logoBarb from "./../../../public/images/logo.jpg";
+import React from "react";
 
 interface Users {
   nome: string;
@@ -123,12 +124,12 @@ function Navbar() {
               <Link to="/Mconta"> Minha conta</Link>
             </li>
 
-            <Link to="/cliente" className="text-white mr-20">
+            <Link to="/cliente" className="text-white mr-20 py-2">
               <VscAccount className="ml-2" size={25} />
-              <h1>Seja bem-vindo {users?.nome}</h1>
+              <h1 className="py-2">Seja bem-vindo {users?.nome}</h1>
             </Link>
             <div>
-              <button onClick={handleLogout} className="text-white">
+              <button onClick={handleLogout} className="text-white py-2">
                 <GrLogin className="ml-2" size={20} />
               </button>
             </div>
