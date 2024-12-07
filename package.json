@@ -16,6 +16,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@mui/material": "^5.16.7",
     "@mui/styled-engine-sc": "^6.0.0-alpha.14",
+    "axios": "^1.7.9",
     "firebase": "^10.9.0",
     "firebase-admin": "^12.3.0",
     "flowbite-react": "^0.10.1",
