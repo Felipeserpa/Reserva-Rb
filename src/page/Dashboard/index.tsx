@@ -14,6 +14,7 @@ import {
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { FcApproval } from "react-icons/fc";
 import { db } from "../../services/firebaseConection";
+import React from "react";
 
 interface User {
   id: string;

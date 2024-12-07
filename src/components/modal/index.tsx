@@ -1,4 +1,15 @@
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import {
+  query,
+  collection,
+  where,
+  orderBy,
+  limit,
+  getDocs,
+  doc,
+  updateDoc,
+  addDoc,
+  getFirestore,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
 
@@ -21,6 +32,7 @@ Modal.setAppElement("#root");
 
 export default function modal() {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [agendamentoId, setAgendamentoId] = useState<string | null>(null); // edicaço do agendemento
 
   const [nome, setNome] = useState("");
   const [tel, setTel] = useState("(81)");
@@ -35,9 +47,34 @@ export default function modal() {
   //tempo para fechar o modal
   const tempoParaFechar = 25000;
 
-  function openModal() {
+  //buscar ultimo agendamento.
+  const openModal = async () => {
+    const user = auth.currentUser;
+
+    if (!user) {
+      toast.error("Usuário não autenticado.");
+      return;
+    }
+
+    const ultimoAgendamento = await buscarUltimoAgendamento(user.uid);
+
+    if (ultimoAgendamento) {
+      const dados = ultimoAgendamento.data();
+      setNome(dados.nome);
+      setTel(dados.tel);
+      setDate(dados.date);
+      setTime(dados.time);
+      setCortes(dados.cortes);
+      setOpcaoSelecinada(dados.opcaoSelecionada);
+
+      // Salve o ID do documento para posterior atualização
+      setAgendamentoId(ultimoAgendamento.id);
+    } else {
+      toast.error("Nenhum agendamento encontrado.");
+    }
+
     setIsOpen(true);
-  }
+  };
 
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
@@ -58,6 +95,11 @@ export default function modal() {
 
   const handleFormSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
+
+    if (!agendamentoId) {
+      toast.error("Nenhum agendamento para atualizar.");
+      return;
+    }
 
     try {
       const user = auth.currentUser;
@@ -94,6 +136,62 @@ export default function modal() {
       console.log("Usuário não autenticado.");
     }
   });
+
+  //BUscar os agendamento
+  const buscarUltimoAgendamento = async (userUid: string) => {
+    const agendamentosRef = collection(db, "agUser");
+    const q = query(
+      agendamentosRef,
+      where("userUid", "==", userUid),
+      orderBy("created", "desc"),
+      limit(1)
+    );
+
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      return querySnapshot.docs[0];
+    }
+    return null;
+  };
+
+  const handleUpdateAgendamento = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+
+    const user = auth.currentUser;
+
+    if (!user) {
+      toast.error("Usuário não autenticado.");
+      return;
+    }
+
+    try {
+      // Busca o último agendamento
+      const ultimoAgendamento = await buscarUltimoAgendamento(user.uid);
+
+      if (!ultimoAgendamento) {
+        toast.error("Nenhum agendamento encontrado para atualizar.");
+        return;
+      }
+
+      const docRef = doc(db, "agUser", ultimoAgendamento.id);
+
+      // Atualiza o documento com os novos dados
+      await updateDoc(docRef, {
+        nome,
+        tel,
+        date,
+        time,
+        cortes,
+        opcaoSelecionada,
+      });
+
+      toast.success("Agendamento atualizado com sucesso!");
+      closeModal();
+    } catch (error) {
+      console.error("Erro ao atualizar agendamento:", error);
+      toast.error("Erro ao atualizar o agendamento.");
+    }
+  };
 
   return (
     <div>
@@ -235,6 +333,13 @@ export default function modal() {
               onClick={closeModal}
             >
               Fechar
+            </button>
+            <button
+              type="button"
+              className="w-24 bg-green-800 hover:bg-green-500 border-solid border-2 border-green-500 text-white rounded-full py-1 focus:ring-2 focus:ring-red-500"
+              onClick={handleUpdateAgendamento}
+            >
+              Salvar Alterações
             </button>
           </div>
         </form>
