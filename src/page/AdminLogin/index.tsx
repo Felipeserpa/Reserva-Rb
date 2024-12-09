@@ -10,6 +10,7 @@ import styles from "./login.module.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../services/firebaseConection";
 import { toast } from "react-toastify";
+import React from "react";
 
 const schema = z.object({
   email: z
@@ -43,7 +44,7 @@ export default function AdminLogin() {
       const user = userCredential.user;
 
       // Verifica se o usuário é um administrador
-      const isAdmin = user.email === "admin@teste.com";
+      const isAdmin = user.email === "rayssa@gmail.com";
 
       if (isAdmin) {
         // Se for um administrador, redireciona para a página de admin

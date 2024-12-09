@@ -62,7 +62,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   // Verifica se o usuário é um administrador com base no e-mail
-  const isAdmin = user?.email === "admin@teste.com";
+  const isAdmin = user?.email === "rayssa@gmail.com";
 
   const login = async (email: string, password: string) => {
     try {
