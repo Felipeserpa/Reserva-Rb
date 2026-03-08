@@ -39,13 +39,13 @@ export default function AdminLogin() {
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
       const user = userCredential.user;
 
       // Verifica se o usuário é um administrador
       const isAdmin = user.email === "rayssa@gmail.com";
-
+      //senha: 123456
       if (isAdmin) {
         // Se for um administrador, redireciona para a página de admin
         navigate("/Dashboard");

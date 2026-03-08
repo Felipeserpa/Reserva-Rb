@@ -8,6 +8,7 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { db } from "../../../services/firebaseConection";
+import React from "react";
 
 interface agendamentos {
   id: string;

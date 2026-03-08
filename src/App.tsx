@@ -12,6 +12,7 @@ import Sobre from "./page/sobre";
 import RecSenha from "./page/Login/RecSenha";
 import { Private } from "../src/routes/Private";
 import { PrivateDashboard } from "./routes/PrivateDashboard";
+import GestaoServicos from "./page/Dashboard/servicos";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,14 @@ const router = createBrowserRouter([
     element: (
       <PrivateDashboard>
         <Dashboard />
+      </PrivateDashboard>
+    ),
+  },
+  {
+    path: "/GestaoServicos",
+    element: (
+      <PrivateDashboard>
+        <GestaoServicos />
       </PrivateDashboard>
     ),
   },
