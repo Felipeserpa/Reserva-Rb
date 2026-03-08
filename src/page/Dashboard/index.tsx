@@ -104,8 +104,9 @@ const Dashboard = () => {
           </button>
           <button className="flex items-center gap-3 px-3 py-2 hover:bg-white/5 rounded-lg transition-all">
             <RiGroupLine />
-
-            <Link to="/servicos">Serviços</Link>
+            <Link to="/GestaoServicos" className="text-yellow-500">
+              Gestão de Serviços
+            </Link>
           </button>
           <button className="flex items-center gap-3 px-3 py-2 hover:bg-white/5 rounded-lg transition-all">
             <RiSettings4Line /> Configurações

@@ -12,7 +12,7 @@ import Sobre from "./page/sobre";
 import RecSenha from "./page/Login/RecSenha";
 import { Private } from "../src/routes/Private";
 import { PrivateDashboard } from "./routes/PrivateDashboard";
-import GestaoServicos from "./page/Dashboard/servicos";
+import GestaoServicos from "./page/Dashboard/GestaoServicos";
 
 const router = createBrowserRouter([
   {
