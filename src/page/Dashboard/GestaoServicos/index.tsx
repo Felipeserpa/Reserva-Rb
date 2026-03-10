@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   collection,
@@ -155,6 +156,11 @@ export default function GestaoServicos() {
             <p className="text-zinc-500 text-sm">
               Configure o catálogo da sua barbearia.
             </p>
+            <div className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-6 rounded-lg flex items-center gap-2 mt-5 transition-all shadow-lg">
+              <Link to="/Dashboard" className="flex items-center gap-2">
+                <RiAddLine size={20} /> Agendamentos
+              </Link>
+            </div>
           </div>
           <button
             onClick={() =>
