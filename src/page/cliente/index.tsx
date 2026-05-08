@@ -20,6 +20,7 @@ import {
   RiServiceLine,
   RiArrowRightLine,
 } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
 // Interfaces para tipagem
 interface Servico {
@@ -32,9 +33,12 @@ interface Servico {
 }
 
 const ClientPage = () => {
+  // estado de navegação
+  const navigate = useNavigate();
   // Estados de Dados
   const [servicosBanco, setServicosBanco] = useState<Servico[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isSending, setIsSending] = useState(false); // para evitar múltiplos cliques no botão de finalizar
 
   // Estados de Seleção do Usuário
   const [step, setStep] = useState(1);
@@ -43,7 +47,7 @@ const ClientPage = () => {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
 
-  // 1. Carregar Serviços Reais do seu Banco
+  // 1. Carregar Serviços cadastrados no seu banco de dados
   useEffect(() => {
     async function getServicos() {
       try {
@@ -81,6 +85,7 @@ const ClientPage = () => {
     ) {
       toast.error("Por favor, selecione todos os campos!");
       return;
+      setIsSending(false); //bloqueia o botão para evitar múltiplos cliques
     }
 
     try {
