@@ -6,6 +6,7 @@ import {
   query,
   orderBy,
   Timestamp,
+  where,
 } from "firebase/firestore";
 import { db } from "../../services/firebaseConection";
 import { toast } from "react-toastify";
@@ -89,6 +90,22 @@ const ClientPage = () => {
     }
 
     try {
+      //REGRA DE NEGÓCIO: VERIFICAR SE JÁ EXISTE AGENDAMENTO -----
+      const q = query(
+        collection(db, "agUser"),
+        where("userUid", "==", user.uid),
+        where("date", "==", selectedDate),
+        where("time", "==", selectedTime),
+      ); // Verifica se o usuário já tem um agendamento no mesmo horário
+
+      const querySnapshot = await getDocs(q); //busca os agendamentos do usuário para a data e hora selecionada
+
+      if (!querySnapshot.empty) {
+        // Se já existe um agendamento para o mesmo horário, exibe um erro e retorna
+        toast.error("Você já tem um agendamento nesse horário!");
+        return;
+      }
+
       // Salva na coleção agUser (que você já usa no Mconta)
       await addDoc(collection(db, "agUser"), {
         nome: user.nome || "Cliente",
