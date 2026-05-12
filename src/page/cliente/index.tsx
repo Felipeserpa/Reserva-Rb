@@ -121,6 +121,10 @@ const ClientPage = () => {
 
       toast.success("🔥 Agendamento realizado com sucesso!");
       setStep(4); // Vai para tela de sucesso
+
+      setTimeout(() => {
+        navigate("/Mconta"); // Redireciona para a página de agendamentos do cliente
+      }, 2000); // Redireciona após 2 segundos para o cliente ver a tela de sucesso
     } catch (error) {
       toast.error("Erro ao processar agendamento.");
     }
@@ -208,12 +212,21 @@ const ClientPage = () => {
 
           {/* STEP 2: BARBEIROS */}
           {step === 2 && (
-            <div className="animate-in slide-in-from-right duration-500">
+            <div className=" relative z-10 animate-in slide-in-from-right duration-500">
               <button
-                onClick={() => setStep(1)}
-                className="text-zinc-500 mb-4 hover:text-white transition-all text-sm"
+                type="button" // Garante que não tente disparar um submit de form
+                onClick={() => {
+                  console.log("Clicou para voltar!");
+                  setStep(1);
+                }}
+                className="relative z-[999] block w-fit text-zinc-500 mb-6 hover:text-white transition-all text-sm font-bold cursor-pointer bg-transparent border-none py-2 pr-4"
+                style={{ pointerEvents: "auto" }} // Força o navegador a aceitar eventos de clique
               >
-                ← Voltar para serviços
+                <span className="flex items-center gap-2">
+                  <RiArrowRightLine className="rotate-180" />{" "}
+                  {/* Ícone para ajudar no visual */}
+                  Voltar para serviços
+                </span>
               </button>
               <h2 className="text-4xl font-bold text-white mb-8">
                 Escolha seu Profissional
